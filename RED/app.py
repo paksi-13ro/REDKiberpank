@@ -5,6 +5,7 @@ Cyberpunk RED - Приложение для заполнения листов с
 from flask import Flask, render_template, request, send_file, jsonify, redirect, url_for
 import json
 import os
+import platform
 from datetime import datetime
 import pdfkit
 import io
@@ -16,9 +17,38 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cyberpunk-red-exact-copy'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-# Конфигурация PDFKit
-WKHTMLTOPDF_PATH = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
+# Конфигурация PDFKit с поддержкой разных платформ
+def get_wkhtmltopdf_path():
+    # Определяем операционную систему
+    system = platform.system().lower()
+    
+    # Для Windows путь к включенному wkhtmltopdf
+    if system == 'windows':
+        local_path = os.path.join(os.path.dirname(__file__), 'wkhtmltopdf', 'bin', 'wkhtmltopdf.exe')
+        if os.path.exists(local_path):
+            return local_path
+        # Если локальный путь не существует, пробуем стандартный путь установки
+        standard_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        if os.path.exists(standard_path):
+            return standard_path
+    else:
+        # Для Linux и других Unix-систем пробуем использовать установленный wkhtmltopdf
+        # или путь внутри проекта (если применимо)
+        local_path = os.path.join(os.path.dirname(__file__), 'wkhtmltopdf', 'bin', 'wkhtmltopdf')
+        if os.path.exists(local_path):
+            return local_path
+        # По умолчанию используем системный путь
+        return '/usr/local/bin/wkhtmltopdf'
+    
+    # Если ничего не нашли, используем просто имя команды
+    return 'wkhtmltopdf'
+
+WKHTMLTOPDF_PATH = get_wkhtmltopdf_path()
+try:
+    config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
+except OSError:
+    # Если не можем создать конфигурацию, работаем без неё
+    config = None
 
 # Папки для хранения
 DATA_FOLDER = 'data'
@@ -123,6 +153,10 @@ def character_pdf(character_id):
         if not character:
             return "Персонаж не найден", 404
         
+        # Проверяем доступность wkhtmltopdf
+        if config is None:
+            return "PDF сервис временно недоступен", 503
+            
         # Генерируем HTML для PDF
         html = render_template('character_pdf.html', data=character)
         
@@ -223,6 +257,10 @@ def crew_pdf(crew_id):
         
         if not crew:
             return "Шестерка не найдена", 404
+            
+        # Проверяем доступность wkhtmltopdf
+        if config is None:
+            return "PDF сервис временно недоступен", 503
         
         html = render_template('crew_pdf.html', data=crew)
         
@@ -321,6 +359,10 @@ def vehicle_pdf(vehicle_id):
         
         if not vehicle:
             return "Транспорт не найден", 404
+            
+        # Проверяем доступность wkhtmltopdf
+        if config is None:
+            return "PDF сервис временно недоступен", 503
         
         html = render_template('vehicle_pdf.html', data=vehicle)
         
