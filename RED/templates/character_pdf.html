@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Лист персонажа - {{ data.name }}</title>
+    <style>
+        /* ТОЧНЫЕ СТИЛИ КАК В PDF */
+        @page {
+            size: A4 landscape;
+            margin: 15mm;
+        }
+        
+        body {
+            font-family: 'Times New Roman', serif;
+            font-size: 11pt;
+            line-height: 1.1;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            width: 297mm;
+            min-height: 210mm;
+        }
+        
+        .character-sheet {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        /* Заголовок */
+        .header {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 8mm;
+            text-decoration: underline;
+        }
+        
+        /* Основная таблица */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8mm;
+            font-size: 10pt;
+        }
+        
+        .main-table th,
+        .main-table td {
+            border: 1px solid #000;
+            padding: 2mm 3mm;
+            vertical-align: top;
+        }
+        
+        .main-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            text-align: left;
+            width: 15%;
+        }
+        
+        .main-table td {
+            width: 35%;
+        }
+        
+        /* Статистики */
+        .stats-section {
+            margin: 8mm 0;
+        }
+        
+        .stats-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 4mm;
+            border-bottom: 1px solid #000;
+            padding-bottom: 1mm;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 3mm;
+            margin-bottom: 6mm;
+        }
+        
+        .stat-box {
+            border: 1px solid #000;
+            padding: 2mm;
+            text-align: center;
+            background: #f8f8f8;
+        }
+        
+        .stat-label {
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 1mm;
+            display: block;
+        }
+        
+        .stat-value {
+            font-size: 14pt;
+            font-weight: bold;
+            height: 6mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Навыки */
+        .skills-section {
+            margin: 8mm 0;
+        }
+        
+        .skills-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 4mm;
+            border-bottom: 1px solid #000;
+            padding-bottom: 1mm;
+        }
+        
+        .skills-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+        
+        .skills-table th,
+        .skills-table td {
+            border: 1px solid #000;
+            padding: 1mm 2mm;
+            text-align: left;
+        }
+        
+        .skills-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        
+        /* Оружие и броня */
+        .weapons-section {
+            margin: 8mm 0;
+        }
+        
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 4mm;
+            border-bottom: 1px solid #000;
+            padding-bottom: 1mm;
+        }
+        
+        .weapons-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+        
+        .weapons-table th,
+        .weapons-table td {
+            border: 1px solid #000;
+            padding: 1mm 2mm;
+            text-align: left;
+        }
+        
+        .weapons-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        
+        /* Жизненный путь */
+        .lifepath-section {
+            margin: 8mm 0;
+        }
+        
+        .lifepath-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+        
+        .lifepath-table th,
+        .lifepath-table td {
+            border: 1px solid #000;
+            padding: 2mm 3mm;
+            vertical-align: top;
+            width: 50%;
+        }
+        
+        .lifepath-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        
+        /* Киберимпланты */
+        .cyberware-section {
+            margin: 8mm 0;
+        }
+        
+        .cyberware-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+        
+        .cyberware-table th,
+        .cyberware-table td {
+            border: 1px solid #000;
+            padding: 2mm 3mm;
+        }
+        
+        .cyberware-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            width: 30%;
+        }
+        
+        /* Примечания */
+        .notes {
+            font-size: 8pt;
+            font-style: italic;
+            color: #666;
+            margin-top: 2mm;
+        }
+        
+        /* Чекбоксы */
+        .checkbox {
+            width: 4mm;
+            height: 4mm;
+            border: 1px solid #000;
+            display: inline-block;
+            margin-right: 2mm;
+            vertical-align: middle;
+        }
+        
+        .checkbox.checked {
+            background-color: #000;
+        }
+        
+        /* Многостраничность */
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .page {
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    <div class="character-sheet">
+        <!-- Страница 1 -->
+        <div class="page">
+            <!-- Заголовок -->
+            <div class="header">vk.com/cyberpunk_red_rus</div>
+            
+            <!-- Основная информация -->
+            <table class="main-table">
+                <tr>
+                    <th>Имя</th>
+                    <td>{{ data.name or '' }}</td>
+                    <th>Роль</th>
+                    <td>{{ data.role or '' }}</td>
+                </tr>
+                <tr>
+                    <th>Осевая способность</th>
+                    <td>{{ data.ability or '' }}</td>
+                    <th>Имя игрока</th>
+                    <td>{{ data.player_name or '' }}</td>
+                </tr>
+            </table>
+            
+            <!-- Статистики -->
+            <div class="stats-section">
+                <div class="stats-title">Характеристики</div>
+                <div class="stats-grid">
+                    {% set stats = [
+                        ('ИНТ', 'intelligence'), ('РЕА', 'reflexes'), ('ЛВК', 'luck'), 
+                        ('ТЕХ', 'technique'), ('ХАР', 'charisma'), ('ВОЛЯ', 'willpower'),
+                        ('УДЧ', 'udch'), ('СКО', 'sko'), ('ТЕЛ', 'tel'), ('ЭМП', 'empathy')
+                    ] %}
+                    {% for label, key in stats %}
+                    <div class="stat-box">
+                        <span class="stat-label">{{ label }}</span>
+                        <div class="stat-value">{{ data.get('stat_' + key, 0) }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Навыки -->
+            <div class="skills-section">
+                <div class="skills-title">Навыки</div>
+                <table class="skills-table">
+                    <tr>
+                        <th>Навык</th>
+                        <th>Характеристика</th>
+                        <th>Уровень</th>
+                        <th>STAT</th>
+                        <th>Бонус</th>
+                    </tr>
+                    {% set skills = [
+                        ('Концентрация (ВОЛЯ)', 'concentration', 'willpower'),
+                        ('Внимательность (РЕА)', 'perception', 'reflexes'),
+                        ('Убеждение (ХАР)', 'persuasion', 'charisma'),
+                        ('Скрытность (СКО)', 'stealth', 'sko'),
+                        ('Выживание (ВОЛЯ)', 'survival', 'willpower'),
+                        ('Ближний бой (ТЕЛ)', 'melee', 'tel'),
+                        ('Дальний бой (ТЕЛ)', 'ranged', 'tel'),
+                        ('Управление ТС (РЕА)', 'driving', 'reflexes'),
+                        ('Образование (ИНТ)', 'education', 'intelligence'),
+                        ('Знание улиц (ИНТ)', 'streetwise', 'intelligence'),
+                        ('Социальное (ХАР)', 'social', 'charisma')
+                    ] %}
+                    {% for label, key, stat in skills %}
+                    <tr>
+                        <td>{{ label }}</td>
+                        <td>{{ stat[:3] }}</td>
+                        <td>{{ data.get('skill_' + key, 0) }}</td>
+                        <td>{{ data.get('skill_' + key + '_stat', '') }}</td>
+                        <td>{{ data.get('skill_' + key + '_bonus', '') }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            
+            <!-- Оружие и броня -->
+            <div class="weapons-section">
+                <div class="section-title">ОРУЖИЕ И БРОНЯ</div>
+                <table class="weapons-table">
+                    <tr>
+                        <th>Тип</th>
+                        <th>Описание</th>
+                        <th>Защита</th>
+                        <th>SP</th>
+                    </tr>
+                    <tr>
+                        <td>Основное оружие</td>
+                        <td>{{ data.primary_weapon or '' }}</td>
+                        <td>Защита головы</td>
+                        <td>{{ data.head_armor_sp or '' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Доп. оружие</td>
+                        <td>{{ data.secondary_weapon or '' }}</td>
+                        <td>Защита туловища</td>
+                        <td>{{ data.body_armor_sp or '' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Другое оружие</td>
+                        <td>{{ data.other_weapons or '' }}</td>
+                        <td>Защита ног</td>
+                        <td>{{ data.legs_armor_sp or '' }}</td>
+                    </tr>
+                </table>
+                <div class="notes">Штамп применяется к РЕА, ЛВК и СКО</div>
+            </div>
+        </div>
+        
+        <!-- Страница 2 -->
+        <div class="page page-break">
+            <!-- Жизненный путь -->
+            <div class="section-title">ЖИЗНЕННЫЙ ПУТЬ</div>
+            <table class="lifepath-table">
+                <tr>
+                    <th>Культурное наследие</th>
+                    <td>{{ data.cultural_heritage or '' }}</td>
+                    <th>Личность</th>
+                    <td>{{ data.personality or '' }}</td>
+                </tr>
+                <tr>
+                    <th>Стиль одежды</th>
+                    <td>{{ data.clothing_style or '' }}</td>
+                    <th>Прическа</th>
+                    <td>{{ data.hairstyle or '' }}</td>
+                </tr>
+                <tr>
+                    <th>Что ты ценишь больше всего?</th>
+                    <td>{{ data.values or '' }}</td>
+                    <th>Отношение к людям?</th>
+                    <td>{{ data.attitude_toward_people or '' }}</td>
+                </tr>
+                <tr>
+                    <th>Самый близкий человек</th>
+                    <td>{{ data.closest_person or '' }}</td>
+                    <th>Самое ценное, чем ты обладаешь</th>
+                    <td>{{ data.most_valuable or '' }}</td>
+                </tr>
+                <tr>
+                    <th>История семьи</th>
+                    <td>{{ data.family_history or '' }}</td>
+                    <th>Среда, в которой прошло детство</th>
+                    <td>{{ data.childhood_environment or '' }}</td>
+                </tr>
+                <tr>
+                    <th>Семейное положение</th>
+                    <td>{{ data.family_status or '' }}</td>
+                    <th>Жизненные цели</th>
+                    <td>{{ data.life_goals or '' }}</td>
+                </tr>
+                <tr>
+                    <th>Друзья</th>
+                    <td>{{ data.friends or '' }}</td>
+                    <th>Трагическая любовь</th>
+                    <td>{{ data.tragic_love or '' }}</td>
+                </tr>
+            </table>
+            
+            <div style="margin-top: 8mm;">
+                <strong>Враги:</strong><br>
+                {{ data.enemies or '' }}
+            </div>
+        </div>
+        
+        <!-- Страница 3 -->
+        <div class="page page-break">
+            <!-- Киберимпланты -->
+            <div class="section-title">КИБЕРИМПЛАНТЫ</div>
+            <table class="cyberware-table">
+                <tr>
+                    <th>Тип киберимпланта</th>
+                    <th>Описание / Характеристики</th>
+                </tr>
+                {% for i in range(1, 9) %}
+                <tr>
+                    <td>{{ data.get('cyberware_' + i|string + '_type', '') }}</td>
+                    <td>{{ data.get('cyberware_' + i|string + '_desc', '') }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="notes">
+                Для базовых киберимплантов (например, киберглаз) поставьте галочку, чтобы обозначить, что он у вас имеется. 
+                Дополнительные опции размещаются в слотах ниже.
+            </div>
+            <div class="notes">
+                Для расширенных киберимплантов (например, для внутреннего киберимпланта) просто пометьте каждую часть в слотах под названием категории.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>THE VEHICLES OF RED - PLAYER VEHICLE</title>
+    <style>
+        /* ТОЧНЫЕ СТИЛИ ИЗ PDF ФАЙЛА */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 10pt;
+            line-height: 1.1;
+            color: #000000;
+            margin: 0;
+            padding: 15mm;
+            background: #ffffff;
+            width: 210mm;
+            min-height: 297mm;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .vehicle-sheet {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        /* Заголовки */
+        .main-title {
+            text-align: center;
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 5mm;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 8mm;
+            text-transform: uppercase;
+        }
+        
+        /* Информация о транспорте */
+        .vehicle-info {
+            margin-bottom: 8mm;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            margin-bottom: 2mm;
+            display: block;
+        }
+        
+        .info-input {
+            width: 100%;
+            border: 1px solid #000;
+            background: transparent;
+            padding: 2mm;
+            font-family: inherit;
+            font-size: inherit;
+            box-sizing: border-box;
+        }
+        
+        /* Основная таблица характеристик */
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10mm;
+            font-size: 9pt;
+        }
+        
+        .stats-table th,
+        .stats-table td {
+            border: 1px solid #000;
+            padding: 1mm 2mm;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .stats-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        
+        .category-cell {
+            text-align: left;
+            font-weight: bold;
+            width: 15%;
+        }
+        
+        .value-cell {
+            width: 20%;
+        }
+        
+        .mod-cell {
+            width: 10%;
+        }
+        
+        .table-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-family: inherit;
+            font-size: inherit;
+            padding: 1mm;
+            outline: none;
+        }
+        
+        /* DVS таблица */
+        .dvs-section {
+            margin-bottom: 10mm;
+        }
+        
+        .dvs-title {
+            text-align: center;
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 3mm;
+            text-transform: uppercase;
+        }
+        
+        .dvs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+        
+        .dvs-table th,
+        .dvs-table td {
+            border: 1px solid #000;
+            padding: 1mm;
+            text-align: center;
+        }
+        
+        .dvs-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        
+        .dvs-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+        }
+        
+        /* Модификации и оружие */
+        .modifications-section, .weapons-section {
+            margin-bottom: 10mm;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-bottom: 3mm;
+            text-transform: uppercase;
+        }
+        
+        .mod-table, .weapon-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+        
+        .mod-table th,
+        .mod-table td,
+        .weapon-table th,
+        .weapon-table td {
+            border: 1px solid #000;
+            padding: 1mm;
+            text-align: left;
+        }
+        
+        .mod-table th,
+        .weapon-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        
+        .mod-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            padding: 1mm;
+            outline: none;
+        }
+        
+        /* Контрольные кнопки */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+        
+        .btn:hover {
+            background: #0055aa;
+        }
+        
+        .btn-save {
+            background: #008000;
+        }
+        
+        .btn-save:hover {
+            background: #006600;
+        }
+        
+        .btn-pdf {
+            background: #cc0000;
+        }
+        
+        .btn-pdf:hover {
+            background: #aa0000;
+        }
+        
+        /* Для печати */
+        @media print {
+            .controls {
+                display: none;
+            }
+            
+            .table-input, .dvs-input, .mod-input {
+                border-bottom: 1px dotted #666;
+            }
+        }
+        
+        /* Подвал */
+        .footer {
+            text-align: center;
+            font-size: 8pt;
+            color: #666;
+            margin-top: 10mm;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="vehicle-sheet">
+        <!-- Контрольные кнопки -->
+        <div class="controls">
+            <button class="btn btn-save" onclick="saveVehicle()">💾 Сохранить</button>
+            <button class="btn" onclick="window.location.href='/'">🏠 Главная</button>
+            {% if vehicle %}
+            <button class="btn btn-pdf" onclick="generatePDF({{ vehicle.id }})">📄 PDF</button>
+            <button class="btn" onclick="deleteVehicle({{ vehicle.id }})" style="background: #990000;">🗑️ Удалить</button>
+            {% endif %}
+        </div>
+        
+        <form id="vehicleForm">
+            <input type="hidden" id="vehicleId" name="id" value="{{ vehicle.id if vehicle else '' }}">
+            
+            <!-- Заголовки -->
+            <div class="main-title">THE VEHICLES OF RED</div>
+            <div class="subtitle">PLAYER VEHICLE</div>
+            
+            <!-- Информация о транспорте -->
+            <div class="vehicle-info">
+                <div style="margin-bottom: 3mm;">
+                    <div class="info-label">Vehicle Type & Name</div>
+                    <input type="text" name="vehicle_name" class="info-input" 
+                           value="{{ vehicle.vehicle_name if vehicle else '' }}" required>
+                </div>
+                
+                <div>
+                    <div class="info-label">Vehicle Description</div>
+                    <textarea name="vehicle_description" class="info-input" rows="3">{{ vehicle.vehicle_description if vehicle else '' }}</textarea>
+                </div>
+            </div>
+            
+            <!-- Основная таблица характеристик -->
+            <table class="stats-table">
+                <tr>
+                    <th colspan="2">Category</th>
+                    <th>Base</th>
+                    <th>MOD</th>
+                    <th colspan="2">Category</th>
+                    <th>Base</th>
+                    <th>MOD</th>
+                </tr>
+                
+                <!-- Speed -->
+                <tr>
+                    <td class="category-cell" rowspan="2">Speed</td>
+                    <td>KPH</td>
+                    <td class="value-cell">
+                        <input type="text" name="speed_kph_base" class="table-input" 
+                               value="{{ vehicle.speed_kph_base if vehicle else '' }}"> +
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="speed_kph_mod" class="table-input"
+                               value="{{ vehicle.speed_kph_mod if vehicle else '' }}">
+                    </td>
+                    <td class="category-cell" rowspan="2">Combat</td>
+                    <td>MOVE</td>
+                    <td class="value-cell">
+                        <input type="text" name="combat_move_base" class="table-input"
+                               value="{{ vehicle.combat_move_base if vehicle else '' }}"> +
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="combat_move_mod" class="table-input"
+                               value="{{ vehicle.combat_move_mod if vehicle else '' }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>MPH</td>
+                    <td class="value-cell">
+                        <input type="text" name="speed_mph_base" class="table-input"
+                               value="{{ vehicle.speed_mph_base if vehicle else '' }}"> +
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="speed_mph_mod" class="table-input"
+                               value="{{ vehicle.speed_mph_mod if vehicle else '' }}">
+                    </td>
+                    <td></td>
+                    <td class="value-cell"></td>
+                    <td class="mod-cell"></td>
+                </tr>
+                
+                <!-- Seating -->
+                <tr>
+                    <td class="category-cell" colspan="2">Seating</td>
+                    <td class="value-cell">
+                        <input type="text" name="seating_base" class="table-input"
+                               value="{{ vehicle.seating_base if vehicle else '' }}"> (Driver/Pilot)
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="seating_mod" class="table-input"
+                               value="{{ vehicle.seating_mod if vehicle else '' }}">
+                    </td>
+                    <td class="category-cell" colspan="2">Cargo</td>
+                    <td class="value-cell">
+                        <input type="text" name="cargo_base" class="table-input"
+                               value="{{ vehicle.cargo_base if vehicle else '' }}"> KG +
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="cargo_mod" class="table-input"
+                               value="{{ vehicle.cargo_mod if vehicle else '' }}">
+                    </td>
+                </tr>
+                
+                <!-- Range -->
+                <tr>
+                    <td class="category-cell" rowspan="2">Range</td>
+                    <td>KM</td>
+                    <td class="value-cell">
+                        <input type="text" name="range_km_base" class="table-input"
+                               value="{{ vehicle.range_km_base if vehicle else '' }}"> +
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="range_km_mod" class="table-input"
+                               value="{{ vehicle.range_km_mod if vehicle else '' }}">
+                    </td>
+                    <td class="category-cell" rowspan="2">Engine</td>
+                    <td></td>
+                    <td class="value-cell">
+                        <input type="text" name="engine_base" class="table-input"
+                               value="{{ vehicle.engine_base if vehicle else '' }}">
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="engine_mod" class="table-input"
+                               value="{{ vehicle.engine_mod if vehicle else '' }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>MI</td>
+                    <td class="value-cell">
+                        <input type="text" name="range_mi_base" class="table-input"
+                               value="{{ vehicle.range_mi_base if vehicle else '' }}"> +
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="range_mi_mod" class="table-input"
+                               value="{{ vehicle.range_mi_mod if vehicle else '' }}">
+                    </td>
+                    <td>LB +</td>
+                    <td class="value-cell"></td>
+                    <td class="mod-cell"></td>
+                </tr>
+                
+                <!-- SDP и SP -->
+                <tr>
+                    <td class="category-cell" colspan="2">SDP</td>
+                    <td class="value-cell">
+                        <input type="text" name="sdp_base" class="table-input"
+                               value="{{ vehicle.sdp_base if vehicle else '' }}"> +
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="sdp_mod" class="table-input"
+                               value="{{ vehicle.sdp_mod if vehicle else '' }}">
+                    </td>
+                    <td class="category-cell" colspan="2">SP</td>
+                    <td class="value-cell">
+                        <input type="text" name="sp_base" class="table-input"
+                               value="{{ vehicle.sp_base if vehicle else '' }}"> +
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="sp_mod" class="table-input"
+                               value="{{ vehicle.sp_mod if vehicle else '' }}">
+                    </td>
+                </tr>
+                
+                <!-- Value и Interface -->
+                <tr>
+                    <td class="category-cell" colspan="2">Value</td>
+                    <td class="value-cell">
+                        <input type="text" name="value_base" class="table-input"
+                               value="{{ vehicle.value_base if vehicle else '' }}"> +
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="value_mod" class="table-input"
+                               value="{{ vehicle.value_mod if vehicle else '' }}">
+                    </td>
+                    <td class="category-cell" colspan="2">Interface</td>
+                    <td class="value-cell">
+                        <input type="text" name="interface_base" class="table-input"
+                               value="{{ vehicle.interface_base if vehicle else '' }}">
+                    </td>
+                    <td class="mod-cell">
+                        <input type="text" name="interface_mod" class="table-input"
+                               value="{{ vehicle.interface_mod if vehicle else '' }}">
+                    </td>
+                </tr>
+            </table>
+            
+            <!-- Разделительная линия -->
+            <hr style="border: none; border-top: 1px solid #000; margin: 10mm 0;">
+            
+            <!-- DVS таблица -->
+            <div class="dvs-section">
+                <div class="dvs-title">DVS AT A GLANCE</div>
+                <table class="dvs-table">
+                    <tr>
+                        <th>Maneuvers</th>
+                        <th>DV</th>
+                        <th>Distance</th>
+                        <th>DV</th>
+                        <th>Distance</th>
+                        <th>DV</th>
+                    </tr>
+                    {% for i in range(12) %}
+                    <tr>
+                        <td><input type="text" name="maneuver_{{ i+1 }}" class="dvs-input" 
+                                   value="{{ vehicle['maneuver_' + (i+1)|string] if vehicle and 'maneuver_' + (i+1)|string in vehicle else '' }}"></td>
+                        <td><input type="text" name="dv1_{{ i+1 }}" class="dvs-input"
+                                   value="{{ vehicle['dv1_' + (i+1)|string] if vehicle and 'dv1_' + (i+1)|string in vehicle else '' }}"></td>
+                        <td><input type="text" name="distance1_{{ i+1 }}" class="dvs-input"
+                                   value="{{ vehicle['distance1_' + (i+1)|string] if vehicle and 'distance1_' + (i+1)|string in vehicle else '' }}"></td>
+                        <td><input type="text" name="dv2_{{ i+1 }}" class="dvs-input"
+                                   value="{{ vehicle['dv2_' + (i+1)|string] if vehicle and 'dv2_' + (i+1)|string in vehicle else '' }}"></td>
+                        <td><input type="text" name="distance2_{{ i+1 }}" class="dvs-input"
+                                   value="{{ vehicle['distance2_' + (i+1)|string] if vehicle and 'distance2_' + (i+1)|string in vehicle else '' }}"></td>
+                        <td><input type="text" name="dv3_{{ i+1 }}" class="dvs-input"
+                                   value="{{ vehicle['dv3_' + (i+1)|string] if vehicle and 'dv3_' + (i+1)|string in vehicle else '' }}"></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            
+            <!-- Подвал первой страницы -->
+            <div class="footer">Capricious Nature Designs</div>
+            
+            <!-- Разрыв страницы для второй страницы PDF -->
+            <div style="page-break-before: always;"></div>
+            
+            <!-- Вторая страница -->
+            <div class="main-title">THE VEHICLES OF RED</div>
+            <div class="subtitle">PLAYER VEHICLE</div>
+            
+            <!-- Модификации -->
+            <div class="modifications-section">
+                <div class="section-title">Vehicle Modifications</div>
+                <table class="mod-table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Change</th>
+                        <th>Value</th>
+                    </tr>
+                    {% for i in range(8) %}
+                    <tr>
+                        <td><input type="text" name="mod_name_{{ i+1 }}" class="mod-input" 
+                                   value="{{ vehicle['mod_name_' + (i+1)|string] if vehicle and 'mod_name_' + (i+1)|string in vehicle else '' }}"></td>
+                        <td><input type="text" name="mod_desc_{{ i+1 }}" class="mod-input"
+                                   value="{{ vehicle['mod_desc_' + (i+1)|string] if vehicle and 'mod_desc_' + (i+1)|string in vehicle else '' }}"></td>
+                        <td><input type="text" name="mod_change_{{ i+1 }}" class="mod-input"
+                                   value="{{ vehicle['mod_change_' + (i+1)|string] if vehicle and 'mod_change_' + (i+1)|string in vehicle else '' }}"></td>
+                        <td><input type="text" name="mod_value_{{ i+1 }}" class="mod-input"
+                                   value="{{ vehicle['mod_value_' + (i+1)|string] if vehicle and 'mod_value_' + (i+1)|string in vehicle else '' }}"></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            
+            <!-- Разделительная линия -->
+            <hr style="border: none; border-top: 1px solid #000; margin: 10mm 0;">
+            
+            <!-- Оружие -->
+            <div class="weapons-section">
+                <div class="section-title">Vehicle Weapons</div>
+                
+                {% for weapon_num in range(1, 4) %}
+                <table class="weapon-table" style="margin-bottom: {% if weapon_num < 3 %}5mm{% else %}0{% endif %};">
+                    <tr>
+                        <th>Weapon Type</th>
+                        <td colspan="3">
+                            <input type="text" name="weapon_{{ weapon_num }}_type" class="mod-input"
+                                   value="{{ vehicle['weapon_' + weapon_num|string + '_type'] if vehicle and 'weapon_' + weapon_num|string + '_type' in vehicle else '' }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Skill</th>
+                        <td>
+                            <input type="text" name="weapon_{{ weapon_num }}_skill" class="mod-input"
+                                   value="{{ vehicle['weapon_' + weapon_num|string + '_skill'] if vehicle and 'weapon_' + weapon_num|string + '_skill' in vehicle else '' }}">
+                        </td>
+                        <th>Damage</th>
+                        <td>
+                            <input type="text" name="weapon_{{ weapon_num }}_damage" class="mod-input"
+                                   value="{{ vehicle['weapon_' + weapon_num|string + '_damage'] if vehicle and 'weapon_' + weapon_num|string + '_damage' in vehicle else '' }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Modes</th>
+                        <td colspan="3">
+                            <input type="text" name="weapon_{{ weapon_num }}_modes" class="mod-input"
+                                   value="{{ vehicle['weapon_' + weapon_num|string + '_modes'] if vehicle and 'weapon_' + weapon_num|string + '_modes' in vehicle else '' }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Magazine</th>
+                        <td>
+                            <input type="text" name="weapon_{{ weapon_num }}_magazine" class="mod-input"
+                                   value="{{ vehicle['weapon_' + weapon_num|string + '_magazine'] if vehicle and 'weapon_' + weapon_num|string + '_magazine' in vehicle else '' }}">
+                        </td>
+                        <th>ROF</th>
+                        <td>
+                            <input type="text" name="weapon_{{ weapon_num }}_rof" class="mod-input"
+                                   value="{{ vehicle['weapon_' + weapon_num|string + '_rof'] if vehicle and 'weapon_' + weapon_num|string + '_rof' in vehicle else '' }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Range</th>
+                        <td>
+                            <input type="text" name="weapon_{{ weapon_num }}_range" class="mod-input"
+                                   value="{{ vehicle['weapon_' + weapon_num|string + '_range'] if vehicle and 'weapon_' + weapon_num|string + '_range' in vehicle else '' }}">
+                        </td>
+                        <th>Value</th>
+                        <td>
+                            <input type="text" name="weapon_{{ weapon_num }}_value" class="mod-input"
+                                   value="{{ vehicle['weapon_' + weapon_num|string + '_value'] if vehicle and 'weapon_' + weapon_num|string + '_value' in vehicle else '' }}">
+                        </td>
+                    </tr>
+                </table>
+                {% endfor %}
+            </div>
+            
+            <!-- Подвал второй страницы -->
+            <div class="footer">Capricious Nature Designs</div>
+        </form>
+    </div>
+    
+    <script>
+        // Сохранение транспорта
+        async function saveVehicle() {
+            const form = document.getElementById('vehicleForm');
+            const formData = new FormData(form);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            try {
+                const response = await fetch('/api/vehicle', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Транспорт сохранен!');
+                    if (!data.id) {
+                        window.location.href = `/vehicle?id=${result.id}`;
+                    }
+                } else {
+                    alert('Ошибка сохранения: ' + result.error);
+                }
+            } catch (error) {
+                alert('Ошибка сети: ' + error);
+            }
+        }
+        
+        // Генерация PDF
+        function generatePDF(vehicleId) {
+            window.open(`/vehicle/${vehicleId}/pdf`, '_blank');
+        }
+        
+        // Удаление транспорта
+        async function deleteVehicle(vehicleId) {
+            if (confirm('Удалить этот транспорт? Все данные будут потеряны.')) {
+                try {
+                    const response = await fetch(`/api/delete/vehicle/${vehicleId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        alert('Транспорт удален');
+                        window.location.href = '/';
+                    } else {
+                        alert('Ошибка удаления: ' + result.error);
+                    }
+                } catch (error) {
+                    alert('Ошибка сети: ' + error);
+                }
+            }
+        }
+        
+        // Автосохранение
+        let saveTimeout;
+        document.querySelectorAll('input, textarea').forEach(element => {
+            element.addEventListener('input', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveVehicle, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

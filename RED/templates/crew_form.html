@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ПРОЖЖЕННЫЕ ШЕСТЕРКИ - СДЕЛАЙ СВОЮ ШЕСТЁРКУ!</title>
+    <style>
+        /* ТОЧНЫЕ СТИЛИ ИЗ PDF ФАЙЛА */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 14pt;
+            line-height: 1.2;
+            color: #000000;
+            margin: 0;
+            padding: 20mm;
+            background: #ffffff;
+            width: 210mm;
+            min-height: 297mm;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .crew-sheet {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        /* Заголовок */
+        .main-title {
+            text-align: center;
+            font-size: 24pt;
+            font-weight: bold;
+            margin-bottom: 15mm;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Статистики сетка */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8mm;
+            margin-bottom: 15mm;
+        }
+        
+        .stat-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10mm;
+        }
+        
+        .stat-block {
+            text-align: center;
+            border: 2px solid #000;
+            padding: 3mm;
+            background: #f8f8f8;
+        }
+        
+        .stat-label {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 2mm;
+            display: block;
+        }
+        
+        .stat-subtitle {
+            font-size: 10pt;
+            color: #666;
+            margin-top: 1mm;
+            font-style: italic;
+        }
+        
+        .stat-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 20pt;
+            font-weight: bold;
+            outline: none;
+            font-family: inherit;
+            height: 15mm;
+        }
+        
+        /* Разделительная линия */
+        .divider {
+            height: 2px;
+            background: #000;
+            margin: 10mm 0;
+            width: 100%;
+        }
+        
+        /* Оружие и защита */
+        .equipment-section {
+            margin: 10mm 0;
+        }
+        
+        .equipment-title {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 5mm;
+            text-align: center;
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10mm;
+            margin-top: 5mm;
+        }
+        
+        .weapons-box, .armor-box {
+            border: 2px solid #000;
+            padding: 5mm;
+            background: #f8f8f8;
+        }
+        
+        .box-title {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 3mm;
+            text-align: center;
+        }
+        
+        .equipment-input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #000;
+            background: transparent;
+            font-family: inherit;
+            font-size: 12pt;
+            padding: 2mm;
+            margin-bottom: 2mm;
+            outline: none;
+        }
+        
+        /* Контрольные кнопки */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+        
+        .btn:hover {
+            background: #0055aa;
+        }
+        
+        .btn-save {
+            background: #008000;
+        }
+        
+        .btn-save:hover {
+            background: #006600;
+        }
+        
+        .btn-pdf {
+            background: #cc0000;
+        }
+        
+        .btn-pdf:hover {
+            background: #aa0000;
+        }
+        
+        /* Для печати */
+        @media print {
+            .controls {
+                display: none;
+            }
+            
+            .stat-input {
+                border-bottom: 1px solid #000;
+            }
+            
+            .equipment-input {
+                border-bottom: 1px solid #000;
+            }
+        }
+        
+        /* Вторая шестерка */
+        .second-crew {
+            margin-top: 20mm;
+        }
+    </style>
+</head>
+<body>
+    <div class="crew-sheet">
+        <!-- Контрольные кнопки -->
+        <div class="controls">
+            <button class="btn btn-save" onclick="saveCrew()">💾 Сохранить</button>
+            <button class="btn" onclick="window.location.href='/'">🏠 Главная</button>
+            {% if crew %}
+            <button class="btn btn-pdf" onclick="generatePDF({{ crew.id }})">📄 PDF</button>
+            <button class="btn" onclick="deleteCrew({{ crew.id }})" style="background: #990000;">🗑️ Удалить</button>
+            {% endif %}
+        </div>
+        
+        <form id="crewForm">
+            <input type="hidden" id="crewId" name="id" value="{{ crew.id if crew else '' }}">
+            
+            <!-- Первая шестерка -->
+            <div class="main-title">ПРОЖЖЕННЫЕ ШЕСТЕРКИ</div>
+            
+            <!-- Статистики первой шестерки -->
+            <div class="stats-grid">
+                {% set stats1 = [
+                    ('ИНТ', 'int', 'Гликол Эдемона'),
+                    ('РЕА', 'rea', 'Тудилс Рынкин'),
+                    ('ЛВК', 'luck', 'Токолог Рынкин'),
+                    ('ТЕХ', 'tech', 'ХАР'),
+                    ('ХАР', 'char', 'ХАР')
+                ] %}
+                {% for label, key, subtitle in stats1 %}
+                <div class="stat-column">
+                    <div class="stat-block">
+                        <span class="stat-label">{{ label }}</span>
+                        <input type="number" name="{{ key }}1" class="stat-input" min="0" max="10"
+                               value="{{ crew[key + '1'] if crew and key + '1' in crew else 0 }}">
+                        <div class="stat-subtitle">{{ subtitle }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Вторая строка статистик -->
+            <div class="stats-grid">
+                {% set stats2 = [
+                    ('ВОЛЯ', 'will', 'Гликол Эдемона'),
+                    ('УДЧ', 'udch', 'Тудилс Рынкин'),
+                    ('СКО', 'sko', 'Токолог Рынкин'),
+                    ('ТЕЛ', 'tel', 'ХАР'),
+                    ('ЭМП', 'emp', 'Сименносок')
+                ] %}
+                {% for label, key, subtitle in stats2 %}
+                <div class="stat-column">
+                    <div class="stat-block">
+                        <span class="stat-label">{{ label }}</span>
+                        <input type="number" name="{{ key }}1" class="stat-input" min="0" max="10"
+                               value="{{ crew[key + '1'] if crew and key + '1' in crew else 0 }}">
+                        <div class="stat-subtitle">{{ subtitle }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Пункты здоровья -->
+            <div style="text-align: center; margin: 10mm 0;">
+                <div style="font-weight: bold; font-size: 16pt; margin-bottom: 3mm;">Пункты Здоровья</div>
+                <input type="text" name="health_points1" class="equipment-input" style="width: 80%; text-align: center;"
+                       value="{{ crew.health_points1 if crew else '' }}">
+                <div style="font-size: 10pt; color: #666; margin-top: 2mm;">Тяжёлой Раннице Сплетеносок</div>
+            </div>
+            
+            <!-- Оружие и защита -->
+            <div class="equipment-section">
+                <div class="equipment-title">Оружие &nbsp;&nbsp;&nbsp; Защита:</div>
+                <div class="equipment-grid">
+                    <div class="weapons-box">
+                        <div class="box-title">Оружие</div>
+                        <input type="text" name="weapon1_1" class="equipment-input" placeholder="Схема Намека"
+                               value="{{ crew.weapon1_1 if crew else '' }}">
+                        <input type="text" name="weapon1_2" class="equipment-input" placeholder="Квиннеклинная Смагазонка"
+                               value="{{ crew.weapon1_2 if crew else '' }}">
+                        <div style="text-align: center; margin-top: 5mm; font-weight: bold;">
+                            Сумма Навыка
+                            <input type="text" name="skill_sum1" class="equipment-input" style="width: 60%;"
+                                   value="{{ crew.skill_sum1 if crew else '' }}">
+                        </div>
+                        <div style="text-align: center; font-size: 10pt; color: #666; margin-top: 2mm;">
+                            Консультанты и Содержание
+                        </div>
+                    </div>
+                    
+                    <div class="armor-box">
+                        <div class="box-title">Защита:</div>
+                        <div style="margin-bottom: 3mm;">
+                            <div style="font-weight: bold; margin-bottom: 2mm;">Голова</div>
+                            <input type="text" name="head_armor1" class="equipment-input"
+                                   value="{{ crew.head_armor1 if crew else '' }}">
+                        </div>
+                        <div>
+                            <div style="font-weight: bold; margin-bottom: 2mm;">Тело</div>
+                            <input type="text" name="body_armor1" class="equipment-input"
+                                   value="{{ crew.body_armor1 if crew else '' }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Разделитель -->
+            <div class="divider"></div>
+            
+            <!-- Вторая шестерка -->
+            <div class="second-crew">
+                <div class="main-title">СДЕЛАЙ СВОЮ ШЕСТЁРКУ!</div>
+                
+                <!-- Статистики второй шестерки -->
+                <div class="stats-grid">
+                    {% for label, key, subtitle in stats1 %}
+                    <div class="stat-column">
+                        <div class="stat-block">
+                            <span class="stat-label">{{ label }}</span>
+                            <input type="number" name="{{ key }}2" class="stat-input" min="0" max="10"
+                                   value="{{ crew[key + '2'] if crew and key + '2' in crew else 0 }}">
+                            <div class="stat-subtitle">{{ subtitle }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Вторая строка статистик -->
+                <div class="stats-grid">
+                    {% for label, key, subtitle in stats2 %}
+                    <div class="stat-column">
+                        <div class="stat-block">
+                            <span class="stat-label">{{ label }}</span>
+                            <input type="number" name="{{ key }}2" class="stat-input" min="0" max="10"
+                                   value="{{ crew[key + '2'] if crew and key + '2' in crew else 0 }}">
+                            <div class="stat-subtitle">{{ subtitle }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Пункты здоровья второй шестерки -->
+                <div style="text-align: center; margin: 10mm 0;">
+                    <div style="font-weight: bold; font-size: 16pt; margin-bottom: 3mm;">Пункты Здоровья</div>
+                    <input type="text" name="health_points2" class="equipment-input" style="width: 80%; text-align: center;"
+                           value="{{ crew.health_points2 if crew else '' }}">
+                    <div style="font-size: 10pt; color: #666; margin-top: 2mm;">Тяжёлой Раннице Сплетеносок</div>
+                </div>
+                
+                <!-- Оружие и защита второй шестерки -->
+                <div class="equipment-section">
+                    <div class="equipment-title">Оружие &nbsp;&nbsp;&nbsp; Защита:</div>
+                    <div class="equipment-grid">
+                        <div class="weapons-box">
+                            <div class="box-title">Оружие</div>
+                            <input type="text" name="weapon2_1" class="equipment-input" placeholder="Схема Намека"
+                                   value="{{ crew.weapon2_1 if crew else '' }}">
+                            <input type="text" name="weapon2_2" class="equipment-input" placeholder="Квиннеклинная Смагазонка"
+                                   value="{{ crew.weapon2_2 if crew else '' }}">
+                            <div style="text-align: center; margin-top: 5mm; font-weight: bold;">
+                                Сумма Навыка
+                                <input type="text" name="skill_sum2" class="equipment-input" style="width: 60%;"
+                                       value="{{ crew.skill_sum2 if crew else '' }}">
+                            </div>
+                            <div style="text-align: center; font-size: 10pt; color: #666; margin-top: 2mm;">
+                                Консультанты и Содержание
+                            </div>
+                        </div>
+                        
+                        <div class="armor-box">
+                            <div class="box-title">Защита:</div>
+                            <div style="margin-bottom: 3mm;">
+                                <div style="font-weight: bold; margin-bottom: 2mm;">Голова</div>
+                                <input type="text" name="head_armor2" class="equipment-input"
+                                       value="{{ crew.head_armor2 if crew else '' }}">
+                            </div>
+                            <div>
+                                <div style="font-weight: bold; margin-bottom: 2mm;">Тело</div>
+                                <input type="text" name="body_armor2" class="equipment-input"
+                                       value="{{ crew.body_armor2 if crew else '' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Номер страницы -->
+            <div style="position: absolute; bottom: 10mm; right: 10mm; font-size: 12pt; color: #666;">
+                123
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Сохранение шестерки
+        async function saveCrew() {
+            const form = document.getElementById('crewForm');
+            const formData = new FormData(form);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            try {
+                const response = await fetch('/api/crew', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Шестерка сохранена!');
+                    if (!data.id) {
+                        window.location.href = `/crew?id=${result.id}`;
+                    }
+                } else {
+                    alert('Ошибка сохранения: ' + result.error);
+                }
+            } catch (error) {
+                alert('Ошибка сети: ' + error);
+            }
+        }
+        
+        // Генерация PDF
+        function generatePDF(crewId) {
+            window.open(`/crew/${crewId}/pdf`, '_blank');
+        }
+        
+        // Удаление шестерки
+        async function deleteCrew(crewId) {
+            if (confirm('Удалить эту шестерку? Все данные будут потеряны.')) {
+                try {
+                    const response = await fetch(`/api/delete/crew/${crewId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        alert('Шестерка удалена');
+                        window.location.href = '/';
+                    } else {
+                        alert('Ошибка удаления: ' + result.error);
+                    }
+                } catch (error) {
+                    alert('Ошибка сети: ' + error);
+                }
+            }
+        }
+        
+        // Автосохранение
+        let saveTimeout;
+        document.querySelectorAll('input').forEach(element => {
+            element.addEventListener('input', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveCrew, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Лист персонажа Cyberpunk RED - vk.com/cyberpunk_red_rus</title>
+    <style>
+        /* ТОЧНЫЕ СТИЛИ ИЗ PDF ФАЙЛА */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        
+        body {
+            font-family: 'Times New Roman', serif;
+            font-size: 11pt;
+            line-height: 1.1;
+            color: #000000;
+            margin: 0;
+            padding: 15mm;
+            background: #ffffff;
+            width: 297mm;
+            min-height: 210mm;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .character-sheet {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border: 1px solid #000;
+            padding: 5mm;
+            box-sizing: border-box;
+        }
+        
+        /* Заголовок */
+        .header {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 8mm;
+            text-decoration: underline;
+        }
+        
+        /* Основная таблица */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8mm;
+            font-size: 10pt;
+        }
+        
+        .main-table th,
+        .main-table td {
+            border: 1px solid #000;
+            padding: 2mm 3mm;
+            vertical-align: top;
+        }
+        
+        .main-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            text-align: left;
+            width: 15%;
+        }
+        
+        .main-table td {
+            width: 35%;
+        }
+        
+        /* Поля ввода */
+        .form-field {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            padding: 1mm;
+            box-sizing: border-box;
+        }
+        
+        .form-field:focus {
+            background-color: #f0f8ff;
+        }
+        
+        /* Статистики */
+        .stats-section {
+            margin: 8mm 0;
+            page-break-inside: avoid;
+        }
+        
+        .stats-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 4mm;
+            border-bottom: 1px solid #000;
+            padding-bottom: 1mm;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 3mm;
+            margin-bottom: 6mm;
+        }
+        
+        .stat-box {
+            border: 1px solid #000;
+            padding: 2mm;
+            text-align: center;
+            background: #f8f8f8;
+        }
+        
+        .stat-label {
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 1mm;
+            display: block;
+        }
+        
+        .stat-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 14pt;
+            font-weight: bold;
+            outline: none;
+            font-family: inherit;
+        }
+        
+        /* Навыки */
+        .skills-section {
+            margin: 8mm 0;
+            page-break-inside: avoid;
+        }
+        
+        .skills-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 4mm;
+            border-bottom: 1px solid #000;
+            padding-bottom: 1mm;
+        }
+        
+        .skills-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+        
+        .skills-table th,
+        .skills-table td {
+            border: 1px solid #000;
+            padding: 1mm 2mm;
+            text-align: left;
+        }
+        
+        .skills-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        
+        .skill-name {
+            width: 25%;
+        }
+        
+        .skill-stat {
+            width: 15%;
+        }
+        
+        .skill-value {
+            width: 12%;
+        }
+        
+        .skill-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 1mm;
+            font-family: inherit;
+            font-size: inherit;
+        }
+        
+        /* Оружие и броня */
+        .weapons-section {
+            margin: 8mm 0;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 4mm;
+            border-bottom: 1px solid #000;
+            padding-bottom: 1mm;
+        }
+        
+        .weapons-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+        
+        .weapons-table th,
+        .weapons-table td {
+            border: 1px solid #000;
+            padding: 1mm 2mm;
+            text-align: left;
+        }
+        
+        .weapons-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        
+        /* Жизненный путь */
+        .lifepath-section {
+            margin: 8mm 0;
+            page-break-inside: avoid;
+        }
+        
+        .lifepath-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+        
+        .lifepath-table th,
+        .lifepath-table td {
+            border: 1px solid #000;
+            padding: 2mm 3mm;
+            vertical-align: top;
+            width: 50%;
+        }
+        
+        .lifepath-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        
+        .lifepath-textarea {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            min-height: 15mm;
+            resize: none;
+            outline: none;
+        }
+        
+        /* Киберимпланты */
+        .cyberware-section {
+            margin: 8mm 0;
+            page-break-inside: avoid;
+        }
+        
+        .cyberware-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+        }
+        
+        .cyberware-table th,
+        .cyberware-table td {
+            border: 1px solid #000;
+            padding: 2mm 3mm;
+        }
+        
+        .cyberware-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            width: 30%;
+        }
+        
+        /* Контрольные кнопки */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+        
+        .btn:hover {
+            background: #0055aa;
+        }
+        
+        .btn-save {
+            background: #008000;
+        }
+        
+        .btn-save:hover {
+            background: #006600;
+        }
+        
+        .btn-pdf {
+            background: #cc0000;
+        }
+        
+        .btn-pdf:hover {
+            background: #aa0000;
+        }
+        
+        /* Примечания */
+        .notes {
+            font-size: 8pt;
+            font-style: italic;
+            color: #666;
+            margin-top: 2mm;
+        }
+        
+        /* Чекбоксы */
+        .checkbox {
+            width: 4mm;
+            height: 4mm;
+            border: 1px solid #000;
+            display: inline-block;
+            margin-right: 2mm;
+            vertical-align: middle;
+        }
+        
+        .checkbox.checked {
+            background-color: #000;
+        }
+        
+        /* Для печати */
+        @media print {
+            .controls {
+                display: none;
+            }
+            
+            .form-field {
+                border-bottom: 1px dotted #666;
+            }
+        }
+        
+        /* Адаптивность */
+        @media screen and (max-width: 1200px) {
+            body {
+                padding: 10mm;
+                width: auto;
+                min-height: auto;
+            }
+            
+            .character-sheet {
+                padding: 3mm;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="character-sheet">
+        <!-- Контрольные кнопки -->
+        <div class="controls">
+            <button class="btn btn-save" onclick="saveCharacter()">💾 Сохранить</button>
+            <button class="btn" onclick="window.location.href='/'">🏠 Главная</button>
+            {% if character %}
+            <button class="btn btn-pdf" onclick="generatePDF({{ character.id }})">📄 PDF</button>
+            <button class="btn" onclick="deleteCharacter({{ character.id }})" style="background: #990000;">🗑️ Удалить</button>
+            {% endif %}
+        </div>
+        
+        <form id="characterForm">
+            <input type="hidden" id="characterId" name="id" value="{{ character.id if character else '' }}">
+            
+            <!-- Заголовок -->
+            <div class="header">vk.com/cyberpunk_red_rus</div>
+            
+            <!-- Основная информация -->
+            <table class="main-table">
+                <tr>
+                    <th>Имя</th>
+                    <td><input type="text" name="name" class="form-field" value="{{ character.name if character else '' }}" required></td>
+                    <th>Роль</th>
+                    <td><input type="text" name="role" class="form-field" value="{{ character.role if character else '' }}"></td>
+                </tr>
+                <tr>
+                    <th>Осевая способность</th>
+                    <td><input type="text" name="ability" class="form-field" value="{{ character.ability if character else '' }}"></td>
+                    <th>Имя игрока</th>
+                    <td><input type="text" name="player_name" class="form-field" value="{{ character.player_name if character else '' }}"></td>
+                </tr>
+            </table>
+            
+            <!-- Статистики -->
+            <div class="stats-section">
+                <div class="stats-title">Характеристики</div>
+                <div class="stats-grid">
+                    {% set stats = [
+                        ('ИНТ', 'intelligence'), ('РЕА', 'reflexes'), ('ЛВК', 'luck'), 
+                        ('ТЕХ', 'technique'), ('ХАР', 'charisma'), ('ВОЛЯ', 'willpower'),
+                        ('УДЧ', 'udch'), ('СКО', 'sko'), ('ТЕЛ', 'tel'), ('ЭМП', 'empathy')
+                    ] %}
+                    {% for label, key in stats %}
+                    <div class="stat-box">
+                        <span class="stat-label">{{ label }}</span>
+                        <input type="number" name="stat_{{ key }}" class="stat-input" min="0" max="10" 
+                               value="{{ character['stat_' + key] if character and 'stat_' + key in character else 0 }}">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Навыки -->
+            <div class="skills-section">
+                <div class="skills-title">Навыки</div>
+                <table class="skills-table">
+                    <tr>
+                        <th class="skill-name">Навык</th>
+                        <th class="skill-stat">Характеристика</th>
+                        <th>Уровень</th>
+                        <th>STAT</th>
+                        <th>Бонус</th>
+                    </tr>
+                    {% set skills = [
+                        ('Концентрация (ВОЛЯ)', 'concentration', 'willpower'),
+                        ('Внимательность (РЕА)', 'perception', 'reflexes'),
+                        ('Убеждение (ХАР)', 'persuasion', 'charisma'),
+                        ('Скрытность (СКО)', 'stealth', 'sko'),
+                        ('Выживание (ВОЛЯ)', 'survival', 'willpower'),
+                        ('Ближний бой (ТЕЛ)', 'melee', 'tel'),
+                        ('Дальний бой (ТЕЛ)', 'ranged', 'tel'),
+                        ('Управление ТС (РЕА)', 'driving', 'reflexes'),
+                        ('Образование (ИНТ)', 'education', 'intelligence'),
+                        ('Знание улиц (ИНТ)', 'streetwise', 'intelligence'),
+                        ('Социальное (ХАР)', 'social', 'charisma')
+                    ] %}
+                    {% for label, key, stat in skills %}
+                    <tr>
+                        <td>{{ label }}</td>
+                        <td>{{ stat[:3] }}</td>
+                        <td><input type="number" name="skill_{{ key }}" class="skill-input" 
+                                   value="{{ character['skill_' + key] if character and 'skill_' + key in character else 0 }}"></td>
+                        <td><input type="text" name="skill_{{ key }}_stat" class="skill-input" 
+                                   value="{{ character['skill_' + key + '_stat'] if character and 'skill_' + key + '_stat' in character else '' }}"></td>
+                        <td><input type="text" name="skill_{{ key }}_bonus" class="skill-input" 
+                                   value="{{ character['skill_' + key + '_bonus'] if character and 'skill_' + key + '_bonus' in character else '' }}"></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            
+            <!-- Оружие и броня -->
+            <div class="weapons-section">
+                <div class="section-title">ОРУЖИЕ И БРОНЯ</div>
+                <table class="weapons-table">
+                    <tr>
+                        <th>Тип</th>
+                        <th>Описание</th>
+                        <th>Защита</th>
+                        <th>SP</th>
+                    </tr>
+                    <tr>
+                        <td>Основное оружие</td>
+                        <td><input type="text" name="primary_weapon" class="form-field" 
+                                   value="{{ character.primary_weapon if character else '' }}"></td>
+                        <td>Защита головы</td>
+                        <td><input type="text" name="head_armor_sp" class="form-field" 
+                                   value="{{ character.head_armor_sp if character else '' }}"></td>
+                    </tr>
+                    <tr>
+                        <td>Доп. оружие</td>
+                        <td><input type="text" name="secondary_weapon" class="form-field" 
+                                   value="{{ character.secondary_weapon if character else '' }}"></td>
+                        <td>Защита туловища</td>
+                        <td><input type="text" name="body_armor_sp" class="form-field" 
+                                   value="{{ character.body_armor_sp if character else '' }}"></td>
+                    </tr>
+                    <tr>
+                        <td>Другое оружие</td>
+                        <td><input type="text" name="other_weapons" class="form-field" 
+                                   value="{{ character.other_weapons if character else '' }}"></td>
+                        <td>Защита ног</td>
+                        <td><input type="text" name="legs_armor_sp" class="form-field" 
+                                   value="{{ character.legs_armor_sp if character else '' }}"></td>
+                    </tr>
+                </table>
+                <div class="notes">Штамп применяется к РЕА, ЛВК и СКО</div>
+            </div>
+            
+            <!-- Жизненный путь (стр. 2 в PDF) -->
+            <div class="lifepath-section">
+                <div class="section-title">ЖИЗНЕННЫЙ ПУТЬ</div>
+                <table class="lifepath-table">
+                    <tr>
+                        <th>Культурное наследие</th>
+                        <td><textarea name="cultural_heritage" class="lifepath-textarea">{{ character.cultural_heritage if character else '' }}</textarea></td>
+                        <th>Личность</th>
+                        <td><textarea name="personality" class="lifepath-textarea">{{ character.personality if character else '' }}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Стиль одежды</th>
+                        <td><textarea name="clothing_style" class="lifepath-textarea">{{ character.clothing_style if character else '' }}</textarea></td>
+                        <th>Прическа</th>
+                        <td><textarea name="hairstyle" class="lifepath-textarea">{{ character.hairstyle if character else '' }}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Что ты ценишь больше всего?</th>
+                        <td><textarea name="values" class="lifepath-textarea">{{ character.values if character else '' }}</textarea></td>
+                        <th>Отношение к людям?</th>
+                        <td><textarea name="attitude_toward_people" class="lifepath-textarea">{{ character.attitude_toward_people if character else '' }}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Самый близкий человек</th>
+                        <td><textarea name="closest_person" class="lifepath-textarea">{{ character.closest_person if character else '' }}</textarea></td>
+                        <th>Самое ценное, чем ты обладаешь</th>
+                        <td><textarea name="most_valuable" class="lifepath-textarea">{{ character.most_valuable if character else '' }}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>История семьи</th>
+                        <td><textarea name="family_history" class="lifepath-textarea">{{ character.family_history if character else '' }}</textarea></td>
+                        <th>Среда, в которой прошло детство</th>
+                        <td><textarea name="childhood_environment" class="lifepath-textarea">{{ character.childhood_environment if character else '' }}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Семейное положение</th>
+                        <td><textarea name="family_status" class="lifepath-textarea">{{ character.family_status if character else '' }}</textarea></td>
+                        <th>Жизненные цели</th>
+                        <td><textarea name="life_goals" class="lifepath-textarea">{{ character.life_goals if character else '' }}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Друзья</th>
+                        <td><textarea name="friends" class="lifepath-textarea">{{ character.friends if character else '' }}</textarea></td>
+                        <th>Трагическая любовь</th>
+                        <td><textarea name="tragic_love" class="lifepath-textarea">{{ character.tragic_love if character else '' }}</textarea></td>
+                    </tr>
+                </table>
+                
+                <div style="margin-top: 5mm;">
+                    <strong>Враги:</strong><br>
+                    <textarea name="enemies" class="lifepath-textarea" style="width: 100%; height: 15mm;">{{ character.enemies if character else '' }}</textarea>
+                </div>
+            </div>
+            
+            <!-- Киберимпланты (стр. 3 в PDF) -->
+            <div class="cyberware-section">
+                <div class="section-title">КИБЕРИМПЛАНТЫ</div>
+                <table class="cyberware-table">
+                    <tr>
+                        <th>Тип киберимпланта</th>
+                        <th>Описание / Характеристики</th>
+                    </tr>
+                    {% for i in range(1, 9) %}
+                    <tr>
+                        <td><input type="text" name="cyberware_{{ i }}_type" class="form-field" 
+                                   value="{{ character['cyberware_' + i|string + '_type'] if character and 'cyberware_' + i|string + '_type' in character else '' }}"></td>
+                        <td><input type="text" name="cyberware_{{ i }}_desc" class="form-field" 
+                                   value="{{ character['cyberware_' + i|string + '_desc'] if character and 'cyberware_' + i|string + '_desc' in character else '' }}"></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <div class="notes">
+                    Для базовых киберимплантов (например, киберглаз) поставьте галочку, чтобы обозначить, что он у вас имеется. 
+                    Дополнительные опции размещаются в слотах ниже.
+                </div>
+                <div class="notes">
+                    Для расширенных киберимплантов (например, для внутреннего киберимпланта) просто пометьте каждую часть в слотах под названием категории.
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Сохранение персонажа
+        async function saveCharacter() {
+            const form = document.getElementById('characterForm');
+            const formData = new FormData(form);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            try {
+                const response = await fetch('/api/character', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Персонаж сохранен!');
+                    if (!data.id) {
+                        window.location.href = `/character?id=${result.id}`;
+                    }
+                } else {
+                    alert('Ошибка сохранения: ' + result.error);
+                }
+            } catch (error) {
+                alert('Ошибка сети: ' + error);
+            }
+        }
+        
+        // Генерация PDF
+        function generatePDF(characterId) {
+            window.open(`/character/${characterId}/pdf`, '_blank');
+        }
+        
+        // Удаление персонажа
+        async function deleteCharacter(characterId) {
+            if (confirm('Удалить этого персонажа? Все данные будут потеряны.')) {
+                try {
+                    const response = await fetch(`/api/delete/character/${characterId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        alert('Персонаж удален');
+                        window.location.href = '/characters';
+                    } else {
+                        alert('Ошибка удаления: ' + result.error);
+                    }
+                } catch (error) {
+                    alert('Ошибка сети: ' + error);
+                }
+            }
+        }
+        
+        // Автосохранение при изменении
+        let saveTimeout;
+        document.querySelectorAll('input, textarea').forEach(element => {
+            element.addEventListener('input', () => {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveCharacter, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

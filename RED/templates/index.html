@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk RED - Точные листы персонажей</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+            background-image: 
+                linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #ff0000;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000;
+            margin-bottom: 10px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            color: #00ffff;
+            margin-bottom: 10px;
+        }
+        
+        .header .description {
+            color: #cccccc;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .sheets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .sheet-card {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sheet-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .sheet-card:hover::before {
+            left: 100%;
+        }
+        
+        .sheet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.3);
+            border-color: #ffff00;
+        }
+        
+        .sheet-card h2 {
+            color: #ffff00;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sheet-card p {
+            color: #cccccc;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff0000, #ff3300);
+            color: white;
+            padding: 14px 35px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(45deg, #ff3300, #ff0000);
+            box-shadow: 0 0 20px #ff0000;
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #0066cc, #0088ff);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, #0088ff, #0066cc);
+            box-shadow: 0 0 20px #0066cc;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(0, 40, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid #00ff00;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .feature h3 {
+            color: #00ffff;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .feature p {
+            color: #cccccc;
+            font-size: 14px;
+        }
+        
+        .instructions {
+            margin: 40px 0;
+            padding: 25px;
+            background: rgba(0, 0, 40, 0.5);
+            border-radius: 8px;
+            border: 1px solid #ffff00;
+        }
+        
+        .instructions h3 {
+            color: #ffff00;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 22px;
+        }
+        
+        .instructions ol {
+            color: #cccccc;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ff0000;
+            color: #999999;
+            font-size: 14px;
+        }
+        
+        .preview-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .preview {
+            border: 1px solid #444;
+            border-radius: 5px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .preview img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .preview:hover img {
+            opacity: 1;
+        }
+        
+        .preview-caption {
+            padding: 10px;
+            background: #222;
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CYBERPUNK RED</h1>
+            <p class="subtitle">ПРИЛОЖЕНИЕ ДЛЯ ЗАПОЛНЕНИЯ ЛИСТОВ</p>
+            <p class="description">Создавайте персонажей, шестерки и транспортные средства с точным соответствием оригинальным листам. Все PDF выглядят точно так же, как оригинальные файлы.</p>
+        </div>
+        
+        <div class="sheets-grid">
+            <div class="sheet-card" onclick="window.location.href='/character'">
+                <h2>ЛИСТ ПЕРСОНАЖА</h2>
+                <p>Создайте персонажа для Cyberpunk RED. Лист в альбомной ориентации, точная копия оригинального листа.</p>
+                <button class="btn">Создать персонажа</button>
+                <button class="btn btn-secondary" onclick="window.location.href='/characters'">Мои персонажи</button>
+            </div>
+            
+            <div class="sheet-card" onclick="window.location.href='/crew'">
+                <h2>ПРОЖЖЁННЫЕ ШЕСТЁРКИ</h2>
+                <p>Создайте шестерку - команду персонажей. Два варианта на одном листе в портретной ориентации.</p>
+                <button class="btn">Создать шестёрку</button>
+            </div>
+            
+            <div class="sheet-card" onclick="window.location.href='/vehicle'">
+                <h2>ТРАНСПОРТНЫЕ СРЕДСТВА</h2>
+                <p>Опишите транспортное средство. Лист в портретной ориентации с таблицами характеристик и вооружения.</p>
+                <button class="btn">Создать тачку</button>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>Точное соответствие</h3>
+                <p>Все листы выглядят точно так же, как оригинальные PDF файлы</p>
+            </div>
+            
+            <div class="feature">
+                <h3>PDF экспорт</h3>
+                <p>Скачивайте заполненные листы в PDF формате для печати</p>
+            </div>
+            
+            <div class="feature">
+                <h3>Сохранение данных</h3>
+                <p>Все данные сохраняются и могут быть отредактированы позже</p>
+            </div>
+            
+            <div class="feature">
+                <h3>Несколько персонажей</h3>
+                <p>Создавайте и управляйте неограниченным количеством персонажей</p>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>КАК ЭТО РАБОТАЕТ:</h3>
+            <ol>
+                <li>Выберите тип листа для заполнения (персонаж, шестерка или транспорт)</li>
+                <li>Заполните все поля в точности как в оригинальном листе</li>
+                <li>Нажмите "Сохранить" для сохранения данных</li>
+                <li>Нажмите "Скачать PDF" для получения готового листа в формате PDF</li>
+                <li>Распечатайте PDF лист или сохраните его в цифровом виде</li>
+                <li>Все сохраненные листы можно редактировать в любое время</li>
+            </ol>
+        </div>
+        
+        <div class="footer">
+            <p>© 2024 Cyberpunk RED Листы персонажей | Создано для точного соответствия оригинальным материалам</p>
+            <p>Все названия и дизайн листов принадлежат соответствующим правообладателям</p>
+        </div>
+    </div>
+    
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Анимация при загрузке
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

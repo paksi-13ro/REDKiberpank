@@ -1,0 +1,205 @@
+/* Основные стили для Cyberpunk RED приложения */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #0a0a0a;
+    color: #00ff00;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Анимация мерцания для киберпанк-эффекта */
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+.flicker {
+    animation: flicker 2s infinite;
+}
+
+/* Стили для сетки данных */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* Стили для кнопок */
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: linear-gradient(45deg, #ff0000, #ff3300);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #ff3300, #ff0000);
+    box-shadow: 0 0 15px #ff0000;
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, #0066cc, #0088ff);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(45deg, #0088ff, #0066cc);
+    box-shadow: 0 0 15px #0066cc;
+}
+
+/* Стили для форм */
+.form-section {
+    background: rgba(0, 30, 0, 0.3);
+    border: 1px solid #00aa00;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.form-section h3 {
+    color: #00ffff;
+    margin-top: 0;
+    border-bottom: 1px solid #00ffff;
+    padding-bottom: 10px;
+}
+
+/* Стили для таблиц */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th {
+    background: rgba(0, 100, 0, 0.5);
+    color: #ffff00;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #00ff00;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #00aa00;
+    background: rgba(0, 20, 0, 0.3);
+}
+
+/* Стили для полей ввода */
+input, select, textarea {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 8px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: 2px solid #00ffff;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* Стили для заголовков */
+h1, h2, h3 {
+    color: #ffff00;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+h1 {
+    border-bottom: 2px solid #ff0000;
+    padding-bottom: 10px;
+}
+
+/* Стили для карточек */
+.card {
+    background: rgba(0, 20, 0, 0.5);
+    border: 1px solid #00ff00;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 20px #00ff00;
+    transform: translateY(-2px);
+}
+
+/* Стили для навигации */
+.nav {
+    background: rgba(0, 40, 0, 0.8);
+    padding: 15px;
+    border-bottom: 2px solid #00ff00;
+    margin-bottom: 30px;
+}
+
+.nav a {
+    color: #00ffff;
+    text-decoration: none;
+    margin-right: 20px;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.nav a:hover {
+    border-color: #00ffff;
+    background: rgba(0, 255, 255, 0.1);
+}
+
+/* Стили для статусных сообщений */
+.alert {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.alert-success {
+    background: rgba(0, 100, 0, 0.3);
+    border-color: #00ff00;
+    color: #00ff00;
+}
+
+.alert-error {
+    background: rgba(100, 0, 0, 0.3);
+    border-color: #ff0000;
+    color: #ff0000;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .data-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav a {
+        display: block;
+        margin: 5px 0;
+    }
+}
