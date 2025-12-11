@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Лист персонажа Cyberpunk Red</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            color: #333;
+        }
+
+        body {
+            background: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            background: white;
+            padding: 25px;
+            border: 4px solid #e63946;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e63946;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cyberpunk-logo {
+            font-family: 'Arial Black', Gadget, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #e63946;
+            letter-spacing: 1px;
+        }
+
+        .border-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid #e63946;
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .footer-line {
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxwYXRoIGQ9Ik0wLDUgTDEwLDIwIEwxNSwxMCBMMjAsMzAgTDI1LDEwIEwyOCwyMCBMMywzMCBMNSw1IEw3LDIwIEw5LDEwIEwxMSwzMCBMMTMsMTAgTDE1LDIwIEwxNywxMCBMMTksMzAgTDIxLDEwIEwyMywyMCBMNDUsMzAgTDQ3LDEwIEw0OSwyMCBMNTAsMTAgTDUyLDIwIEw1NCwxMCBMNTYsMjAgTDU4LDEwIEw2MCwyMCBMNjIsMTAgTDY0LDIwIEw2NiwxMCBMNjgsMjAgTDcwLDEwIEw3MiwyMCBMNzQsMTAgTDc2LDIwIEw3OCwxMCBMODAsMjAgTDgyLDEwIEw4NCwyMCBMODYsMTAgTDg4LDIwIEw5MCwxMCBMOTIsMjAgTDk0LDEwIEw5NiwyMCBMOTgsMTAgTDEwMCwyMCIgc3Ryb2tlPSIjZTYzOTQ2IiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz48L3N2Zz4=');
+            background-repeat: repeat-x;
+            background-position: bottom;
+        }
+
+        /* Основные блоки */
+        .section {
+            margin-bottom: 20px;
+            border: 2px solid #e63946;
+            border-radius: 5px;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .section-title {
+            background: #000;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-radius: 3px;
+        }
+
+        .row {
+            display: flex;
+            margin: 0 -5px;
+        }
+
+        .col {
+            padding: 0 5px;
+            flex: 1;
+        }
+
+        .field {
+            margin-bottom: 8px;
+            padding: 5px;
+            border: 1px solid #e63946;
+            border-radius: 3px;
+            background: white;
+            min-height: 20px;
+        }
+
+        .field-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #e63946;
+            padding: 5px;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .table th {
+            background: #000;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .stat-column {
+            width: 30px;
+            text-align: center;
+        }
+
+        .checkbox {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 1px solid #e63946;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .red-box {
+            background: #e63946;
+            color: white;
+            padding: 2px 5px;
+            font-size: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .skeleton {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .skeleton img {
+            max-width: 300px;
+            height: auto;
+        }
+
+        .note {
+            font-size: 12px;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        .arrow {
+            font-size: 20px;
+            color: #e63946;
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        /* Специфичные стили для каждой страницы */
+
+        /* Страница 1: Основная информация */
+        .main-info {
+            display: flex;
+            gap: 15px;
+        }
+
+        .avatar-box {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #e63946;
+            background: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .stats-sidebar {
+            width: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .stat-box {
+            padding: 5px;
+            border: 1px solid #e63946;
+            background: white;
+            min-height: 25px;
+        }
+
+        .stat-name {
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .weapons-table {
+            margin-top: 10px;
+        }
+
+        .weapons-table th:first-child {
+            width: 50%;
+        }
+
+        .weapons-table th:nth-child(2),
+        .weapons-table th:nth-child(3) {
+            width: 15%;
+        }
+
+        .weapons-table th:last-child {
+            width: 20%;
+        }
+
+        /* Страница 2: Киберимпланты */
+        .implant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .implant-category {
+            display: flex;
+            gap: 10px;
+        }
+
+        .implant-category > div {
+            flex: 1;
+        }
+
+        .implant-category .label {
+            background: #000;
+            color: white;
+            padding: 3px 5px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .implant-category .info {
+            border: 1px solid #e63946;
+            padding: 5px;
+            min-height: 20px;
+        }
+
+        .skeleton-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .skeleton-img {
+            max-width: 300px;
+            height: auto;
+            opacity: 0.7;
+        }
+
+        .skeleton-arrows {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .skeleton-arrow {
+            position: absolute;
+            color: #e63946;
+            font-size: 24px;
+            transform: rotate(-45deg);
+        }
+
+        .skeleton-arrow.top {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-45deg);
+        }
+
+        .skeleton-arrow.left {
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .skeleton-arrow.right {
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%) rotate(-135deg);
+        }
+
+        /* Страница 3: Жизненный путь */
+        .life-path-section {
+            display: flex;
+            gap: 15px;
+        }
+
+        .life-path-col {
+            flex: 1;
+        }
+
+        .life-path-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .life-path-field {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #e63946;
+            min-height: 25px;
+        }
+
+        .life-path-subfields {
+            margin-top: 5px;
+            padding-left: 15px;
+        }
+
+        .life-path-subfields .field {
+            margin-bottom: 5px;
+        }
+
+        .money-section {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .money-field {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #e63946;
+            background: white;
+            min-height: 25px;
+        }
+
+        .money-title {
+            background: #000;
+            color: white;
+            padding: 3px 5px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .notes-section {
+            margin-top: 15px;
+        }
+
+        .notes-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .notes-table th {
+            background: #000;
+            color: white;
+            padding: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        .notes-table td {
+            border: 1px solid #e63946;
+            padding: 5px;
+            min-height: 20px;
+        }
+
+        /* Адаптивность */
+        @media print {
+            .page {
+                break-after: page;
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page {
+                padding: 10px;
+            }
+            .section {
+                padding: 5px;
+            }
+            .field {
+                padding: 3px;
+            }
+            .table th,
+            .table td {
+                padding: 3px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Страница 1: Основная информация -->
+<div class="page">
+    <div class="border-frame"></div>
+    <div class="footer-line"></div>
+    <div class="page-header">
+        <div class="page-title">Лист персонажа</div>
+        <div class="cyberpunk-logo">CYBERPUNK RED</div>
+    </div>
+
+    <div class="main-info">
+        <div class="avatar-box">Аватар персонажа</div>
+        <div class="stats-sidebar">
+            <div class="stat-box">
+                <div class="stat-name">ИНТ</div>
+                <div class="stat-value">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-name">РЕА</div>
+                <div class="stat-value">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-name">ЛВК</div>
+                <div class="stat-value">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-name">ТЕХ</div>
+                <div class="stat-value">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-name">ХАР</div>
+                <div class="stat-value">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-name">ВОЛЯ</div>
+                <div class="stat-value">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-name">УДЧ</div>
+                <div class="stat-value">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-name">СКО</div>
+                <div class="stat-value">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-name">ТЕЛ</div>
+                <div class="stat-value">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-name">ЭМП</div>
+                <div class="stat-value">—</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="field"><span class="field-label">Имя</span></div>
+            <div class="field"><span class="field-label">Роль</span></div>
+            <div class="field"><span class="field-label">Особая способность</span> <span class="red-box">НАЗВАНИЕ</span></div>
+            <div class="field"><span class="field-label">Заметки</span></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Навыки восприятия</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Концентрация (Воля)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Слух/Обоняние объекта (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Чтение по губам (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Внимательность (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Выслеживание (ИНТ)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Физические навыки</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Атлетика (ЛВК)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Акробатика (ЛВК)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Точность (ЛВК)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Выносливость (ВОЛЯ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Сопр. пыткам/наркотикам (ВОЛЯ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Скрытность (ЛВК)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Навыки управления</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Вождение (РЕА)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Пилотирование (x2) (РЕА)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Судоходство (РЕА)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Верховая езда (РЕА)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Образовательные навыки</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Бухгалтерия (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Обращение с животными (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Бюрократия (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Бизнес (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Коммуникации (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Криминология (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Криптография (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Дедукция (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Образование (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Азартные игры (ИНТ)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Образовательные навыки</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Язык (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Уличный сленг</td><td></td><td></td><td></td></tr>
+                        <tr><td>Поиск информации (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Знание местности (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Твой дом</td><td></td><td></td><td></td></tr>
+                        <tr><td>Наука (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Техника (ИНТ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Выживание в пустыне (ИНТ)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Навыки ближнего боя</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Рукопашный бой (ЛВК)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Уклонение (ЛВК)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Боевые искусства (x2) (ЛВК)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Оружие ближнего боя (ЛВК)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Сценические навыки</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Актерское мастерство (ХАР)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Игра на инструменте (ТЕХ)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Навыки дальнего боя</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Стрельба из лука (РЕА)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Автоматический огонь (x2) (РЕА)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Пистолеты (РЕА)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Навыки дальнего боя</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Оружие крупного кал. (x2) (РЕА)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Тактическое оружие (РЕА)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Социальные навыки</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Подкуп (ХАР)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Общение (ЭМП)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Проницательность (ЭМП)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Дипломатия (ХАР)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Убеждение (ХАР)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Уход за собой (ХАР)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Этикет Улиц (ХАР)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Торговля (ХАР)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Гердероб и стиль (ХАР)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Технические навыки</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Навык</th>
+                            <th class="stat-column">УР</th>
+                            <th class="stat-column">STAT</th>
+                            <th class="stat-column">СУМ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Авиационные технологии (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Знание техники (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Кибертехника (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Подрывник (x2) (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Электроника/Безопасность (x2) (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Первая помощь (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Фольсификация (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Автомеханика (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Художественное ремесло (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Парамедик (x2) (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Кино- и фототехника (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Взлом замков (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Кормление (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Морские технологии (ТЕХ)</td><td></td><td></td><td></td></tr>
+                        <tr><td>Оружейник (ТЕХ)</td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Человечность</div>
+                <div class="field" style="display: flex; align-items: center;">
+                    <span>Человечность</span>
+                    <span class="red-box" style="margin-left: 10px;">СЦ</span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Пункты здоровья</div>
+                <div class="field" style="display: flex; align-items: center;">
+                    <span>Пункты здоровья</span>
+                    <span class="red-box" style="margin-left: 10px;">СЦ</span>
+                </div>
+                <div class="field"><span class="field-label">Тяжёлое ранение</span></div>
+                <div class="field"><span class="field-label">-2 на все Действия с Тяжёлым ранением</span></div>
+                <div class="field"><span class="field-label">Испытание против смерти</span></div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="section">
+                <div class="section-title">Критические травмы</div>
+                <div class="field"><span class="field-label">Зависимости</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">ОРУЖИЕ и БРОНЯ</div>
+        <div class="row">
+            <div class="col">
+                <div class="section-title">Броня</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Защита головы</th>
+                            <th class="stat-column">ОС</th>
+                            <th class="stat-column">Штраф</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Защита туловища</td><td></td><td></td></tr>
+                        <tr><td>Щит</td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <div class="field" style="font-size: 10px; margin-top: 5px;">
+                    Штрафы применяются к РЕА, ЛВК и СКО
+                </div>
+            </div>
+            <div class="col">
+                <div class="section-title">Оружие</div>
+                <table class="table weapons-table">
+                    <thead>
+                        <tr>
+                            <th>Оружие</th>
+                            <th>Урон</th>
+                            <th>Боепр.</th>
+                            <th>ROF</th>
+                            <th>Заметки</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td></td><td></td><td></td><td></td><td></td></tr>

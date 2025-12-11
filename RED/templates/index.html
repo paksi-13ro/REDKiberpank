@@ -33,6 +33,16 @@
             box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
         }
         
+        .new-badge {
+            background: #ff0000;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-left: 10px;
+            vertical-align: super;
+        }
+        
         .header {
             text-align: center;
             padding: 20px 0;
@@ -257,9 +267,16 @@
         
         <div class="sheets-grid">
             <div class="sheet-card" onclick="window.location.href='/character'">
-                <h2>ЛИСТ ПЕРСОНАЖА</h2>
+                <h2>ЛИСТ ПЕРСОНАЖА <span class="new-badge">NEW</span></h2>
                 <p>Создайте персонажа для Cyberpunk RED. Лист в альбомной ориентации, точная копия оригинального листа.</p>
                 <button class="btn">Создать персонажа</button>
+                <button class="btn btn-secondary" onclick="window.location.href='/characters'">Мои персонажи</button>
+            </div>
+            
+            <div class="sheet-card" onclick="window.location.href='/interactive_character'">
+                <h2>ИНТЕРАКТИВНЫЙ ЛИСТ</h2>
+                <p>Интерактивный лист персонажа в стиле aternia.games с вкладками и удобным интерфейсом.</p>
+                <button class="btn">Интерактивный лист</button>
                 <button class="btn btn-secondary" onclick="window.location.href='/characters'">Мои персонажи</button>
             </div>
             

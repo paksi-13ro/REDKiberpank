@@ -193,6 +193,28 @@ def character_pdf(character_id):
         return jsonify({'error': str(e)}), 500
 
 # ========================
+# ИНТЕРАКТИВНЫЙ ЛИСТ ПЕРСОНАЖА
+# ========================
+@app.route('/interactive_character')
+def interactive_character():
+    """Интерактивный лист персонажа в стиле aternia.games"""
+    character_id = request.args.get('id')
+    character = None
+    
+    if character_id:
+        try:
+            with open(CHARACTERS_FILE, 'r', encoding='utf-8') as f:
+                characters = json.load(f)
+                for char in characters:
+                    if str(char.get('id')) == character_id:
+                        character = char
+                        break
+        except:
+            pass
+    
+    return render_template('interactive_character.html', character=character)
+
+# ========================
 # ШЕСТЕРКИ (ПРОЖЖЕННЫЕ ШЕСТЕРКИ)
 # ========================
 @app.route('/crew', methods=['GET'])

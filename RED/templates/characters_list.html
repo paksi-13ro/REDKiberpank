@@ -113,34 +113,48 @@
                 </div>
                 
                 <div class="actions">
-                    <a href="{{ url_for('character_form', id=character.id) }}" class="btn">РЕДАКТИРОВАТЬ</a>
-                    <a href="{{ url_for('character_pdf', character_id=character.id) }}" class="btn">PDF</a>
-                    <button onclick="deleteCharacter({{ character.id }})" class="btn btn-delete">УДАЛИТЬ</button>
+                    <button class="btn btn-edit" onclick="editCharacter({{ character.id }})">Редактировать</button>
+                    <button class="btn btn-interactive" onclick="openInteractive({{ character.id }})">Интерактив</button>
+                    <button class="btn btn-pdf" onclick="downloadPDF({{ character.id }})">PDF</button>
+                    <button class="btn btn-delete" onclick="deleteCharacter({{ character.id }})">Удалить</button>
                 </div>
             </div>
             {% else %}
-            <p style="grid-column: 1 / -1; text-align: center;">Нет созданных персонажей</p>
+            <div class="empty-state">
+                <p>У вас пока нет персонажей.</p>
+                <p><a href="/character" style="color: #0ff;">Создать первого персонажа</a></p>
+            </div>
             {% endfor %}
         </div>
         
         <div style="text-align: center; margin-top: 30px;">
-            <a href="{{ url_for('character_form') }}" class="btn-home">Создать нового персонажа</a>
-            <a href="{{ url_for('index') }}" class="btn-home">На главную</a>
+            <a href="/" class="back-link">&larr; Назад на главную</a>
         </div>
     </div>
     
     <script>
-        async function deleteCharacter(characterId) {
-            if (confirm('Удалить этого персонажа?')) {
+        function editCharacter(id) {
+            window.location.href = `/character?id=${id}`;
+        }
+        
+        function openInteractive(id) {
+            window.location.href = `/interactive_character?id=${id}`;
+        }
+        
+        function downloadPDF(id) {
+            window.open(`/character/${id}/pdf`, '_blank');
+        }
+        
+        async function deleteCharacter(id) {
+            if (confirm('Вы уверены, что хотите удалить этого персонажа?')) {
                 try {
-                    const response = await fetch(`/api/delete/character/${characterId}`, {
+                    const response = await fetch(`/api/delete/character/${id}`, {
                         method: 'DELETE'
                     });
                     
                     const result = await response.json();
                     
                     if (result.success) {
-                        alert('Персонаж удален');
                         location.reload();
                     } else {
                         alert('Ошибка удаления: ' + result.error);
@@ -151,5 +165,30 @@
             }
         }
     </script>
+```
+
+characters_list.html
+```html
+<<<<<<< SEARCH
+            <p><strong>Роль:</strong> {{ character.role|default('Не указана') }}</p>
+            <p><strong>Здоровье:</strong> {{ character.health|default(0) }}/10</p>
+            
+            <div class="character-stats">
+                {% if character.stats %}
+                    {% for stat, value in character.stats.items() %}
+                    <div class="stat">
+                        <strong>{{ stat|upper }}:</strong> {{ value }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="character-stats">
+                <div class="stat">
+                    <span class="stat-name">Роль:</span> {{ character.role or '-' }}
+                </div>
+                <div class="stat">
+                    <span class="stat-name">Игрок:</span> {{ character.player_name or '-' }}
+                </div>
+            </div>
 </body>
 </html>
