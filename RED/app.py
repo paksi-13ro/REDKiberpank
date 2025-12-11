@@ -90,20 +90,8 @@ def index():
 def character_form():
     """Форма создания/редактирования персонажа (альбомная ориентация)"""
     character_id = request.args.get('id')
-    character = None
-    
-    if character_id:
-        try:
-            with open(CHARACTERS_FILE, 'r', encoding='utf-8') as f:
-                characters = json.load(f)
-                for char in characters:
-                    if str(char.get('id')) == character_id:
-                        character = char
-                        break
-        except:
-            pass
-    
-    return render_template('character_form.html', character=character)
+    # Перенаправляем на интерактивную форму
+    return redirect(url_for('interactive_character', id=character_id))
 
 @app.route('/api/character', methods=['POST'])
 def save_character():
@@ -199,6 +187,7 @@ def character_pdf(character_id):
 def interactive_character():
     """Интерактивный лист персонажа в стиле aternia.games"""
     character_id = request.args.get('id')
+    download_pdf = request.args.get('download_pdf')
     character = None
     
     if character_id:
@@ -211,6 +200,10 @@ def interactive_character():
                         break
         except:
             pass
+    
+    # Если указан флаг download_pdf, перенаправляем на генерацию PDF
+    if character and download_pdf:
+        return redirect(url_for('character_pdf', character_id=character['id']))
     
     return render_template('interactive_character.html', character=character)
 
