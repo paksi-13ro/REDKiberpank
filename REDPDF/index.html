@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REDPDF - Киберпанк лист персонажа</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="cyber-container">
+        <header class="cyber-header">
+            <h1><span class="glitch">REDPDF</span> ЛИСТ ПЕРСОНАЖА</h1>
+        </header>
+
+        <div class="login-section" id="loginSection">
+            <div class="cyber-card">
+                <h2>ВХОД АДМИНИСТРАТОРА</h2>
+                <form id="adminLoginForm">
+                    <div class="input-group">
+                        <label for="adminUsername">ИМЯ ПОЛЬЗОВАТЕЛЯ</label>
+                        <input type="text" id="adminUsername" placeholder="Введите имя администратора" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="adminPassword">ПАРОЛЬ</label>
+                        <input type="password" id="adminPassword" placeholder="Введите пароль администратора" required>
+                    </div>
+                    <button type="submit" class="cyber-btn">ВОЙТИ</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="main-content" id="mainContent" style="display:none;">
+            <nav class="cyber-nav">
+                <ul>
+                    <li><a href="#" class="active" data-tab="character">ПЕРСОНАЖ</a></li>
+                    <li><a href="#" data-tab="life-path">ЖИЗНЕННЫЙ ПУТЬ</a></li>
+                    <li><a href="#" data-tab="cybernetics">КИБЕРИМПЛАНТЫ</a></li>
+                    <li><a href="#" data-tab="profile">ПРОФИЛЬ</a></li>
+                </ul>
+            </nav>
+
+            <div class="tabs-container">
+                <!-- Tab 1: Character Info -->
+                <section class="tab-content active" id="character">
+                    <h2>ОБЩАЯ ИНФОРМАЦИЯ О НАВЫКАХ</h2>
+                    
+                    <div class="avatar-upload">
+                        <label>АВАТАР</label>
+                        <input type="file" id="avatar" accept="image/*">
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="charName">ИМЯ</label>
+                            <input type="text" id="charName" placeholder="Имя персонажа">
+                        </div>
+                        <div class="input-group">
+                            <label for="charRole">РОЛЬ</label>
+                            <input type="text" id="charRole" placeholder="Роль персонажа">
+                        </div>
+                        <div class="input-group">
+                            <label for="charRank">РАНГ</label>
+                            <input type="text" id="charRank" placeholder="Ранг персонажа">
+                        </div>
+                        <div class="input-group">
+                            <label for="charNotes">ЗАМЕТКИ</label>
+                            <textarea id="charNotes" placeholder="Дополнительные заметки"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="charHealth">ЗДОРОВЬЕ</label>
+                            <input type="number" id="charHealth" placeholder="Очки здоровья">
+                        </div>
+                    </div>
+                    
+                    <h3>ХАРАКТЕРИСТИКИ</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="intellect">ИНТЕЛЛЕКТ</label>
+                            <input type="number" id="intellect" min="1" max="20">
+                            <input type="number" id="intellect2" min="1" max="20">
+                            <input type="number" id="intellect3" min="1" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="reaction">РЕАКЦИЯ</label>
+                            <input type="number" id="reaction" min="1" max="20">
+                            <input type="number" id="reaction2" min="1" max="20">
+                            <input type="number" id="reaction3" min="1" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="reflexes">ЛОВКОСТЬ</label>
+                            <input type="number" id="reflexes" min="1" max="20">
+                            <input type="number" id="reflexes2" min="1" max="20">
+                            <input type="number" id="reflexes3" min="1" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="tech">ТЕХНИКА</label>
+                            <input type="number" id="tech" min="1" max="20">
+                            <input type="number" id="tech2" min="1" max="20">
+                            <input type="number" id="tech3" min="1" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="charisma">ХАРИЗМА</label>
+                            <input type="number" id="charisma" min="1" max="20">
+                            <input type="number" id="charisma2" min="1" max="20">
+                            <input type="number" id="charisma3" min="1" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="will">ВОЛЯ</label>
+                            <input type="number" id="will" min="1" max="20">
+                            <input type="number" id="will2" min="1" max="20">
+                            <input type="number" id="will3" min="1" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="luck">УДАЧА</label>
+                            <input type="number" id="luck" min="1" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="speed">СКОРОСТЬ</label>
+                            <input type="number" id="speed" min="1" max="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="body">ТЕЛО</label>
+                            <input type="number" id="body" min="1" max="20">
+                        </div>
+                    </div>
+                    
+                    <h3>НАВЫКИ</h3>
+                    <div class="skills-section">
+                        <h4>НАВЫКИ ВОСПРИЯТИЯ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="concentration">КОНЦЕНТРАЦИЯ</label>
+                                <input type="number" id="concentration" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="hideObject">СКРЫТИЕ/РАСКРЫТИЕ ОБЪЕКТА</label>
+                                <input type="number" id="hideObject" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="lipReading">ЧТЕНИЕ ПО ГУБАМ</label>
+                                <input type="number" id="lipReading" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="attention">ВНИМАТЕЛЬНОСТЬ</label>
+                                <input type="number" id="attention" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="tracking">ВЫСЛЕЖИВАНИЕ</label>
+                                <input type="number" id="tracking" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>ФИЗИЧЕСКИЕ НАВЫКИ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="athletics">АТЛЕТИКА</label>
+                                <input type="number" id="athletics" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="acrobatics">АКРОБАТИКА</label>
+                                <input type="number" id="acrobatics" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="dance">ТАНЕЦ</label>
+                                <input type="number" id="dance" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="endurance">ВЫНОСЛИВОСТЬ</label>
+                                <input type="number" id="endurance" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="resistance">СОПРОТИВЛЕНИЕ ПЫТКАМ/НАРКОТИКАМ</label>
+                                <input type="number" id="resistance" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="stealth">СКРЫТНОСТЬ</label>
+                                <input type="number" id="stealth" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>НАВЫКИ УПРАВЛЕНИЯ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="driving">ВОЖДЕНИЕ</label>
+                                <input type="number" id="driving" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="piloting">ПИЛОТИРОВАНИЕ</label>
+                                <input type="number" id="piloting" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="navigation">СУДОХОДСТВО</label>
+                                <input type="number" id="navigation" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="riding">ВЕРХОВАЯ ЕЗДА</label>
+                                <input type="number" id="riding" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>ОБРАЗОВАТЕЛЬНЫЕ НАВЫКИ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="accounting">БУХГАЛТЕРИЯ</label>
+                                <input type="number" id="accounting" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="animals">ОБЩЕНИЕ С ЖИВОТНЫМИ</label>
+                                <input type="number" id="animals" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="bureaucracy">БЮРОКРАТИЯ</label>
+                                <input type="number" id="bureaucracy" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="business">БИЗНЕС</label>
+                                <input type="number" id="business" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="composition">КОМПОЗИЦИЯ</label>
+                                <input type="number" id="composition" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="criminology">КРИМИНОЛОГИЯ</label>
+                                <input type="number" id="criminology" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="cryptography">КРИПТОГРАФИЯ</label>
+                                <input type="number" id="cryptography" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="deduction">ДЕДУКЦИЯ</label>
+                                <input type="number" id="deduction" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="education">ОБРАЗОВАНИЕ</label>
+                                <input type="number" id="education" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="gambling">АЗАРТНЫЕ ИГРЫ</label>
+                                <input type="number" id="gambling" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>ЯЗЫК</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="slang">УЛИЧНЫЙ СЛЕНГ</label>
+                                <input type="number" id="slang" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="language1">ЯЗЫК 1</label>
+                                <input type="text" id="language1Name" placeholder="Название языка">
+                                <input type="number" id="language1" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="language2">ЯЗЫК 2</label>
+                                <input type="text" id="language2Name" placeholder="Название языка">
+                                <input type="number" id="language2" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>ПОИСК ИНФОРМАЦИИ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="infoSearch">ПОИСК ИНФОРМАЦИИ</label>
+                                <input type="number" id="infoSearch" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>ЗНАНИЕ МЕСТНОСТИ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="homeArea">ТВОЙ ДОМ</label>
+                                <input type="number" id="homeArea" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="area1">МЕСТНОСТЬ 1</label>
+                                <input type="text" id="area1Name" placeholder="Название местности">
+                                <input type="number" id="area1" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="area1stat">СТАТ. МЕСТНОСТИ 1</label>
+                                <input type="number" id="area1stat" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="area2">МЕСТНОСТЬ 2</label>
+                                <input type="text" id="area2Name" placeholder="Название местности">
+                                <input type="number" id="area2" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="area2stat">СТАТ. МЕСТНОСТИ 2</label>
+                                <input type="number" id="area2stat" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>ТАКТИКА</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="tactics">ТАКТИКА</label>
+                                <input type="number" id="tactics" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>ВЫЖИВАНИЕ В ПУСТЫНЕ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="desertSurvival">ВЫЖИВАНИЕ В ПУСТЫНЕ</label>
+                                <input type="number" id="desertSurvival" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>НАВЫКИ БЛИЖНЕГО БОЯ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="melee">РУКОПАШНЫЙ БОЙ</label>
+                                <input type="number" id="melee" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="dodge">УКЛОНЕНИЕ</label>
+                                <input type="number" id="dodge" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="martialArts">БОЕВЫЕ ИСКУССТВА</label>
+                                <input type="number" id="martialArts" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="meleeWeapons">ОРУЖИЕ БЛИЖНЕГО БОЯ</label>
+                                <input type="number" id="meleeWeapons" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>СЦЕНИЧЕСКИЕ НАВЫКИ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="acting">АКТЕРСКОЕ МАСТЕРСТВО</label>
+                                <input type="number" id="acting" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>ИГРА НА ИНСТРУМЕНТЕ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="instrument1">МУЗЫКАЛЬНЫЙ ИНСТРУМЕНТ 1</label>
+                                <input type="text" id="instrument1Name" placeholder="Название инструмента">
+                                <input type="number" id="instrument1" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="instrument1stat">СТАТ. МУЗЫКАЛЬНОГО ИНСТРУМЕНТА 1</label>
+                                <input type="number" id="instrument1stat" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="instrument2">МУЗЫКАЛЬНЫЙ ИНСТРУМЕНТ 2</label>
+                                <input type="text" id="instrument2Name" placeholder="Название инструмента">
+                                <input type="number" id="instrument2" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="instrument2stat">СТАТ. МУЗЫКАЛЬНОГО ИНСТРУМЕНТА 2</label>
+                                <input type="number" id="instrument2stat" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>НАВЫКИ ДАЛЬНЕГО БОЯ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="archery">СТРЕЛЬБА ИЗ ЛУКА</label>
+                                <input type="number" id="archery" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="automaticFire">АВТОМАТИЧЕСКИЙ ОГОНЬ</label>
+                                <input type="number" id="automaticFire" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="pistols">ПИСТОЛЕТЫ</label>
+                                <input type="number" id="pistols" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="heavyWeapons">ОРУЖИЕ КРУПНОГО КАЛИБРА</label>
+                                <input type="number" id="heavyWeapons" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="tacticalWeapons">ТАКТИЧЕСКОЕ ОРУЖИЕ</label>
+                                <input type="number" id="tacticalWeapons" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>СОЦИАЛЬНЫЕ НАВЫКИ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="bribery">ПОДКУП</label>
+                                <input type="number" id="bribery" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="conversation">ОБЩЕНИЕ</label>
+                                <input type="number" id="conversation" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="insight">ПРОНИЦАТЕЛЬНОСТЬ</label>
+                                <input type="number" id="insight" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="interrogation">ДОПРОС</label>
+                                <input type="number" id="interrogation" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="persuasion">УБЕЖДЕНИЕ</label>
+                                <input type="number" id="persuasion" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="selfCare">УХОД ЗА СОБОЙ</label>
+                                <input type="number" id="selfCare" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="streetWise">ЗНАТОК УЛИЦ</label>
+                                <input type="number" id="streetWise" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="trading">ТОРГОВЛЯ</label>
+                                <input type="number" id="trading" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="wardrobe">ГАРДЕРОБ И СТИЛЬ</label>
+                                <input type="number" id="wardrobe" min="1" max="20">
+                            </div>
+                        </div>
+                        
+                        <h4>ТЕХНИЧЕСКИЕ НАВЫКИ</h4>
+                        <div class="skill-group">
+                            <div class="input-group">
+                                <label for="aviationTech">АВИАЦИОННЫЕ ТЕХНОЛОГИИ</label>
+                                <input type="number" id="aviationTech" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="techKnowledge">ЗНАНИЕ ТЕХНИКИ</label>
+                                <input type="number" id="techKnowledge" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="cyberTech">КИБЕРТЕХНИКА</label>
+                                <input type="number" id="cyberTech" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="demolitions">ПОДРЫВНИК</label>
+                                <input type="number" id="demolitions" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="electronics">ЭЛЕКТРОНИКА/БЕЗОПАСНОСТЬ</label>
+                                <input type="number" id="electronics" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="firstAid">ПЕРВАЯ ПОМОЩЬ</label>
+                                <input type="number" id="firstAid" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="falsification">ФАЛЬСИФИКАЦИЯ</label>
+                                <input type="number" id="falsification" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="automotive">АВТОМЕХАНИКА</label>
+                                <input type="number" id="automotive" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="craft">ХУДОЖЕСТВЕННОЕ РЕМЕСЛО</label>
+                                <input type="number" id="craft" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="paramedic">ПАРАМЕДИК</label>
+                                <input type="number" id="paramedic" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="photoVideo">КИНО- И ФОТО- ТЕХНИКА</label>
+                                <input type="number" id="photoVideo" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="locksmith">ВЗЛОМ ЗАМКОВ</label>
+                                <input type="number" id="locksmith" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="pickpocket">КАРМАННИК</label>
+                                <input type="number" id="pickpocket" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="marineTech">МОРСКИЕ ТЕХНОЛОГИИ</label>
+                                <input type="number" id="marineTech" min="1" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="weaponsmith">ОРУЖЕЙНИК</label>
+                                <input type="number" id="weaponsmith" min="1" max="20">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Tab 2: Life Path -->
+                <section class="tab-content" id="life-path">
+                    <h2>ЖИЗНЕННЫЙ ПУТЬ ПЕРСОНАЖА</h2>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="pseudonyms">ПСЕВДОНИМЫ</label>
+                            <input type="text" id="pseudonyms" placeholder="Псевдонимы персонажа">
+                        </div>
+                        <div class="input-group">
+                            <label for="heritage">КУЛЬТУРНОЕ НАСЛЕДИЕ</label>
+                            <input type="text" id="heritage" placeholder="Культурное наследие">
+                        </div>
+                        <div class="input-group">
+                            <label for="personality">ЛИЧНОСТЬ</label>
+                            <textarea id="personality" placeholder="Описание личности"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="style">СТИЛЬ ОДЕЖДЫ</label>
+                            <textarea id="style" placeholder="Стиль одежды"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="valuesMost">ЧТО ТЫ ЦЕНИШЬ БОЛЬШЕ ВСЕГО?</label>
+                            <textarea id="valuesMost" placeholder="Что вы цените больше всего"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="closestPerson">САМЫЙ БЛИЗКИЙ ЧЕЛОВЕК</label>
+                            <input type="text" id="closestPerson" placeholder="Самый близкий человек">
+                        </div>
+                        <div class="input-group">
+                            <label for="familyHistory">ИСТОРИЯ СЕМЬИ</label>
+                            <textarea id="familyHistory" placeholder="История семьи"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="familyCrisis">СЕМЕЙНЫЙ КРИЗИС</label>
+                            <textarea id="familyCrisis" placeholder="Семейный кризис"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="haircut">ПРИЧЕСКА</label>
+                            <input type="text" id="haircut" placeholder="Прическа">
+                        </div>
+                        <div class="input-group">
+                            <label for="attitudePeople">ОТНОШЕНИЕ К ЛЮДЯМ?</label>
+                            <textarea id="attitudePeople" placeholder="Отношение к людям"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="valuablePossession">САМОЕ ЦЕННОЕ ЧЕМ ТЫ ОБЛАДАЕШЬ</label>
+                            <input type="text" id="valuablePossession" placeholder="Самое ценное владение">
+                        </div>
+                        <div class="input-group">
+                            <label for="lifeGoals">ЖИЗНЕННЫЕ ЦЕЛИ</label>
+                            <textarea id="lifeGoals" placeholder="Жизненные цели"></textarea>
+                        </div>
+                    </div>
+                    
+                    <h3>ДРУЗЬЯ</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="friend1">ДРУГ 1</label>
+                            <input type="text" id="friend1" placeholder="Имя друга 1">
+                        </div>
+                        <div class="input-group">
+                            <label for="friend2">ДРУГ 2</label>
+                            <input type="text" id="friend2" placeholder="Имя друга 2">
+                        </div>
+                        <div class="input-group">
+                            <label for="friend3">ДРУГ 3</label>
+                            <input type="text" id="friend3" placeholder="Имя друга 3">
+                        </div>
+                    </div>
+                    
+                    <h3>ТРАГИЧЕСКАЯ ЛЮБОВЬ</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="tragicLove1">ТРАГИЧЕСКАЯ ЛЮБОВЬ 1</label>
+                            <input type="text" id="tragicLove1" placeholder="Имя трагической любви 1">
+                        </div>
+                        <div class="input-group">
+                            <label for="tragicLove2">ТРАГИЧЕСКАЯ ЛЮБОВЬ 2</label>
+                            <input type="text" id="tragicLove2" placeholder="Имя трагической любви 2">
+                        </div>
+                        <div class="input-group">
+                            <label for="tragicLove3">ТРАГИЧЕСКАЯ ЛЮБОВЬ 3</label>
+                            <input type="text" id="tragicLove3" placeholder="Имя трагической любви 3">
+                        </div>
+                    </div>
+                    
+                    <h3>ВРАГИ</h3>
+                    <div class="enemies-section">
+                        <div class="enemy-group">
+                            <div class="input-group">
+                                <label for="enemy1">ВРАГ 1</label>
+                                <input type="text" id="enemy1" placeholder="Имя врага 1">
+                            </div>
+                            <div class="input-group">
+                                <label for="enemy1Reason">ПРИЧИНА ВРАЖДЫ 1</label>
+                                <input type="text" id="enemy1Reason" placeholder="Причина вражды">
+                            </div>
+                            <div class="input-group">
+                                <label for="enemy1Action">ЧТО МОЖЕТ СДЕЛАТЬ ВРАГ 1</label>
+                                <input type="text" id="enemy1Action" placeholder="Что может сделать враг">
+                            </div>
+                            <div class="input-group">
+                                <label for="enemy1Outcome">ЧТО ДОЛЖНО ПРОИЗОЙТИ 1</label>
+                                <input type="text" id="enemy1Outcome" placeholder="Что должно произойти">
+                            </div>
+                        </div>
+                        
+                        <div class="enemy-group">
+                            <div class="input-group">
+                                <label for="enemy2">ВРАГ 2</label>
+                                <input type="text" id="enemy2" placeholder="Имя врага 2">
+                            </div>
+                            <div class="input-group">
+                                <label for="enemy2Reason">ПРИЧИНА ВРАЖДЫ 2</label>
+                                <input type="text" id="enemy2Reason" placeholder="Причина вражды">
+                            </div>
+                            <div class="input-group">
+                                <label for="enemy2Action">ЧТО МОЖЕТ СДЕЛАТЬ ВРАГ 2</label>
+                                <input type="text" id="enemy2Action" placeholder="Что может сделать враг">
+                            </div>
+                            <div class="input-group">
+                                <label for="enemy2Outcome">ЧТО ДОЛЖНО ПРОИЗОЙТИ 2</label>
+                                <input type="text" id="enemy2Outcome" placeholder="Что должно произойти">
+                            </div>
+                        </div>
+                        
+                        <div class="enemy-group">
+                            <div class="input-group">
+                                <label for="enemy3">ВРАГ 3</label>
+                                <input type="text" id="enemy3" placeholder="Имя врага 3">
+                            </div>
+                            <div class="input-group">
+                                <label for="enemy3Reason">ПРИЧИНА ВРАЖДЫ 3</label>
+                                <input type="text" id="enemy3Reason" placeholder="Причина вражды">
+                            </div>
+                            <div class="input-group">
+                                <label for="enemy3Action">ЧТО МОЖЕТ СДЕЛАТЬ ВРАГ 3</label>
+                                <input type="text" id="enemy3Action" placeholder="Что может сделать враг">
+                            </div>
+                            <div class="input-group">
+                                <label for="enemy3Outcome">ЧТО ДОЛЖНО ПРОИЗОЙТИ 3</label>
+                                <input type="text" id="enemy3Outcome" placeholder="Что должно произойти">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>СНАРЯЖЕНИЕ</h3>
+                    <div class="equipment-section">
+                        <div class="equipment-group">
+                            <div class="input-group">
+                                <label for="equipment1">СНАРЯЖЕНИЕ 1</label>
+                                <input type="text" id="equipment1" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes1">ЗАМЕТКИ СНАРЯЖЕНИЯ 1</label>
+                                <textarea id="equipmentNotes1" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment2">СНАРЯЖЕНИЕ 2</label>
+                                <input type="text" id="equipment2" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes2">ЗАМЕТКИ СНАРЯЖЕНИЯ 2</label>
+                                <textarea id="equipmentNotes2" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment3">СНАРЯЖЕНИЕ 3</label>
+                                <input type="text" id="equipment3" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes3">ЗАМЕТКИ СНАРЯЖЕНИЯ 3</label>
+                                <textarea id="equipmentNotes3" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment4">СНАРЯЖЕНИЕ 4</label>
+                                <input type="text" id="equipment4" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes4">ЗАМЕТКИ СНАРЯЖЕНИЯ 4</label>
+                                <textarea id="equipmentNotes4" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment5">СНАРЯЖЕНИЕ 5</label>
+                                <input type="text" id="equipment5" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes5">ЗАМЕТКИ СНАРЯЖЕНИЯ 5</label>
+                                <textarea id="equipmentNotes5" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment6">СНАРЯЖЕНИЕ 6</label>
+                                <input type="text" id="equipment6" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes6">ЗАМЕТКИ СНАРЯЖЕНИЯ 6</label>
+                                <textarea id="equipmentNotes6" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment7">СНАРЯЖЕНИЕ 7</label>
+                                <input type="text" id="equipment7" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes7">ЗАМЕТКИ СНАРЯЖЕНИЯ 7</label>
+                                <textarea id="equipmentNotes7" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment8">СНАРЯЖЕНИЕ 8</label>
+                                <input type="text" id="equipment8" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes8">ЗАМЕТКИ СНАРЯЖЕНИЯ 8</label>
+                                <textarea id="equipmentNotes8" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment9">СНАРЯЖЕНИЕ 9</label>
+                                <input type="text" id="equipment9" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes9">ЗАМЕТКИ СНАРЯЖЕНИЯ 9</label>
+                                <textarea id="equipmentNotes9" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment10">СНАРЯЖЕНИЕ 10</label>
+                                <input type="text" id="equipment10" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes10">ЗАМЕТКИ СНАРЯЖЕНИЯ 10</label>
+                                <textarea id="equipmentNotes10" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment11">СНАРЯЖЕНИЕ 11</label>
+                                <input type="text" id="equipment11" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes11">ЗАМЕТКИ СНАРЯЖЕНИЯ 11</label>
+                                <textarea id="equipmentNotes11" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment12">СНАРЯЖЕНИЕ 12</label>
+                                <input type="text" id="equipment12" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes12">ЗАМЕТКИ СНАРЯЖЕНИЯ 12</label>
+                                <textarea id="equipmentNotes12" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment13">СНАРЯЖЕНИЕ 13</label>
+                                <input type="text" id="equipment13" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes13">ЗАМЕТКИ СНАРЯЖЕНИЯ 13</label>
+                                <textarea id="equipmentNotes13" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment14">СНАРЯЖЕНИЕ 14</label>
+                                <input type="text" id="equipment14" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes14">ЗАМЕТКИ СНАРЯЖЕНИЯ 14</label>
+                                <textarea id="equipmentNotes14" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment15">СНАРЯЖЕНИЕ 15</label>
+                                <input type="text" id="equipment15" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes15">ЗАМЕТКИ СНАРЯЖЕНИЯ 15</label>
+                                <textarea id="equipmentNotes15" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment16">СНАРЯЖЕНИЕ 16</label>
+                                <input type="text" id="equipment16" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes16">ЗАМЕТКИ СНАРЯЖЕНИЯ 16</label>
+                                <textarea id="equipmentNotes16" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment17">СНАРЯЖЕНИЕ 17</label>
+                                <input type="text" id="equipment17" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes17">ЗАМЕТКИ СНАРЯЖЕНИЯ 17</label>
+                                <textarea id="equipmentNotes17" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="equipment18">СНАРЯЖЕНИЕ 18</label>
+                                <input type="text" id="equipment18" placeholder="Предмет снаряжения">
+                                <label for="equipmentNotes18">ЗАМЕТКИ СНАРЯЖЕНИЯ 18</label>
+                                <textarea id="equipmentNotes18" placeholder="Заметки к снаряжению"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>ОБРАЗ И СТИЛЬ</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="imageStyle">ОБРАЗ И СТИЛЬ</label>
+                            <textarea id="imageStyle" placeholder="Образ и стиль"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="housing">ЖИЛЬЕ</label>
+                            <input type="text" id="housing" placeholder="Описание жилья">
+                        </div>
+                        <div class="input-group">
+                            <label for="rent">АРЕНДНАЯ ПЛАТА</label>
+                            <input type="text" id="rent" placeholder="Размер арендной платы">
+                        </div>
+                        <div class="input-group">
+                            <label for="lifestyle">ОБРАЗ ЖИЗНИ</label>
+                            <input type="text" id="lifestyle" placeholder="Тип образа жизни">
+                        </div>
+                        <div class="input-group">
+                            <label for="roleplayPath">РОЛЕВОЙ ЖИЗНЕННЫЙ ПУТЬ</label>
+                            <textarea id="roleplayPath" placeholder="Ролевой жизненный путь"></textarea>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Tab 3: Cybernetics -->
+                <section class="tab-content" id="cybernetics">
+                    <h2>КИБЕРИМПЛАНТЫ ПЕРСОНАЖА</h2>
+                    
+                    <h3>ПОЛЯ ГДЕ НУЖНО ПОСТАВИТЬ ИЛИ НЕ СТАВИТЬ ГАЛОЧКУ</h3>
+                    <div class="checkbox-grid">
+                        <div class="input-group checkbox-group">
+                            <label for="cyberAudio">ЕСТЬ ЛИ КИБЕР АУДИО?</label>
+                            <input type="checkbox" id="cyberAudio">
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label for="rightEye">ЕСТЬ ЛИ ПРАВЫЙ КИБЕРГЛАЗ?</label>
+                            <input type="checkbox" id="rightEye">
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label for="rightArm">ЕСТЬ ЛИ ПРАВАЯ КИБЕРРУКА?</label>
+                            <input type="checkbox" id="rightArm">
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label for="rightLeg">ЕСТЬ ЛИ ПРАВАЯ КИБЕРНОГА?</label>
+                            <input type="checkbox" id="rightLeg">
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label for="interface">ЕСТЬ ЛИ ИНТЕРФЕЙС?</label>
+                            <input type="checkbox" id="interface">
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label for="leftEye">ЕСТЬ ЛИ ЛЕВЫЙ КИБЕРГЛАЗ?</label>
+                            <input type="checkbox" id="leftEye">
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label for="leftArm">ЕСТЬ ЛИ ЛЕВАЯ КИБЕРРУКА?</label>
+                            <input type="checkbox" id="leftArm">
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label for="leftLeg">ЕСТЬ ЛИ ЛЕВАЯ КИБЕРНОГА?</label>
+                            <input type="checkbox" id="leftLeg">
+                        </div>
+                    </div>
+                    
+                    <h3>ОСТАЛЬНЫЕ ПОЛЯ ПРОСТО ДЛЯ ЗАПОЛНЕНИЯ ИДУТ ПО ТРИ ШТУКИ</h3>
+                    <div class="implant-section">
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="audioImplant1">ИМПЛАНТ КИБЕРАУДИО 1</label>
+                                <input type="text" id="audioImplant1" placeholder="Название импланта кибераудио">
+                                <label for="audioInfo1">ИНФОРМАЦИЯ ИМПЛАНТА КИБЕРАУДИО 1</label>
+                                <input type="text" id="audioInfo1" placeholder="Информация импланта кибераудио">
+                            </div>
+                            <div class="input-group">
+                                <label for="audioImplant2">ИМПЛАНТ КИБЕРАУДИО 2</label>
+                                <input type="text" id="audioImplant2" placeholder="Название импланта кибераудио">
+                                <label for="audioInfo2">ИНФОРМАЦИЯ ИМПЛАНТА КИБЕРАУДИО 2</label>
+                                <input type="text" id="audioInfo2" placeholder="Информация импланта кибераудио">
+                            </div>
+                            <div class="input-group">
+                                <label for="audioImplant3">ИМПЛАНТ КИБЕРАУДИО 3</label>
+                                <input type="text" id="audioImplant3" placeholder="Название импланта кибераудио">
+                                <label for="audioInfo3">ИНФОРМАЦИЯ ИМПЛАНТА КИБЕРАУДИО 3</label>
+                                <input type="text" id="audioInfo3" placeholder="Информация импланта кибераудио">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="rightEyeImplant1">ИМПЛАНТ ПРАВОГО ГЛАЗА 1</label>
+                                <input type="text" id="rightEyeImplant1" placeholder="Название импланта правого глаза">
+                                <label for="rightEyeInfo1">ИНФОРМАЦИЯ ИМПЛАНТА ПРАВОГО ГЛАЗА 1</label>
+                                <input type="text" id="rightEyeInfo1" placeholder="Информация импланта правого глаза">
+                            </div>
+                            <div class="input-group">
+                                <label for="rightEyeImplant2">ИМПЛАНТ ПРАВОГО ГЛАЗА 2</label>
+                                <input type="text" id="rightEyeImplant2" placeholder="Название импланта правого глаза">
+                                <label for="rightEyeInfo2">ИНФОРМАЦИЯ ИМПЛАНТА ПРАВОГО ГЛАЗА 2</label>
+                                <input type="text" id="rightEyeInfo2" placeholder="Информация импланта правого глаза">
+                            </div>
+                            <div class="input-group">
+                                <label for="rightEyeImplant3">ИМПЛАНТ ПРАВОГО ГЛАЗА 3</label>
+                                <input type="text" id="rightEyeImplant3" placeholder="Название импланта правого глаза">
+                                <label for="rightEyeInfo3">ИНФОРМАЦИЯ ИМПЛАНТА ПРАВОГО ГЛАЗА 3</label>
+                                <input type="text" id="rightEyeInfo3" placeholder="Информация импланта правого глаза">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="leftEyeImplant1">ИМПЛАНТ ЛЕВОГО ГЛАЗА 1</label>
+                                <input type="text" id="leftEyeImplant1" placeholder="Название импланта левого глаза">
+                                <label for="leftEyeInfo1">ИНФОРМАЦИЯ ИМПЛАНТА ЛЕВОГО ГЛАЗА 1</label>
+                                <input type="text" id="leftEyeInfo1" placeholder="Информация импланта левого глаза">
+                            </div>
+                            <div class="input-group">
+                                <label for="leftEyeImplant2">ИМПЛАНТ ЛЕВОГО ГЛАЗА 2</label>
+                                <input type="text" id="leftEyeImplant2" placeholder="Название импланта левого глаза">
+                                <label for="leftEyeInfo2">ИНФОРМАЦИЯ ИМПЛАНТА ЛЕВОГО ГЛАЗА 2</label>
+                                <input type="text" id="leftEyeInfo2" placeholder="Информация импланта левого глаза">
+                            </div>
+                            <div class="input-group">
+                                <label for="leftEyeImplant3">ИМПЛАНТ ЛЕВОГО ГЛАЗА 3</label>
+                                <input type="text" id="leftEyeImplant3" placeholder="Название импланта левого глаза">
+                                <label for="leftEyeInfo3">ИНФОРМАЦИЯ ИМПЛАНТА ЛЕВОГО ГЛАЗА 3</label>
+                                <input type="text" id="leftEyeInfo3" placeholder="Информация импланта левого глаза">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="rightArmImplant1">ИМПЛАНТ ПРАВОЙ РУКИ 1</label>
+                                <input type="text" id="rightArmImplant1" placeholder="Название импланта правой руки">
+                                <label for="rightArmInfo1">ИНФОРМАЦИЯ ИМПЛАНТА ПРАВОЙ РУКИ 1</label>
+                                <input type="text" id="rightArmInfo1" placeholder="Информация импланта правой руки">
+                            </div>
+                            <div class="input-group">
+                                <label for="rightArmImplant2">ИМПЛАНТ ПРАВОЙ РУКИ 2</label>
+                                <input type="text" id="rightArmImplant2" placeholder="Название импланта правой руки">
+                                <label for="rightArmInfo2">ИНФОРМАЦИЯ ИМПЛАНТА ПРАВОЙ РУКИ 2</label>
+                                <input type="text" id="rightArmInfo2" placeholder="Информация импланта правой руки">
+                            </div>
+                            <div class="input-group">
+                                <label for="rightArmImplant3">ИМПЛАНТ ПРАВОЙ РУКИ 3</label>
+                                <input type="text" id="rightArmImplant3" placeholder="Название импланта правой руки">
+                                <label for="rightArmInfo3">ИНФОРМАЦИЯ ИМПЛАНТА ПРАВОЙ РУКИ 3</label>
+                                <input type="text" id="rightArmInfo3" placeholder="Информация импланта правой руки">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="leftArmImplant1">ИМПЛАНТ ЛЕВОЙ РУКИ 1</label>
+                                <input type="text" id="leftArmImplant1" placeholder="Название импланта левой руки">
+                                <label for="leftArmInfo1">ИНФОРМАЦИЯ ИМПЛАНТА ЛЕВОЙ РУКИ 1</label>
+                                <input type="text" id="leftArmInfo1" placeholder="Информация импланта левой руки">
+                            </div>
+                            <div class="input-group">
+                                <label for="leftArmImplant2">ИМПЛАНТ ЛЕВОЙ РУКИ 2</label>
+                                <input type="text" id="leftArmImplant2" placeholder="Название импланта левой руки">
+                                <label for="leftArmInfo2">ИНФОРМАЦИЯ ИМПЛАНТА ЛЕВОЙ РУКИ 2</label>
+                                <input type="text" id="leftArmInfo2" placeholder="Информация импланта левой руки">
+                            </div>
+                            <div class="input-group">
+                                <label for="leftArmImplant3">ИМПЛАНТ ЛЕВОЙ РУКИ 3</label>
+                                <input type="text" id="leftArmImplant3" placeholder="Название импланта левой руки">
+                                <label for="leftArmInfo3">ИНФОРМАЦИЯ ИМПЛАНТА ЛЕВОЙ РУКИ 3</label>
+                                <input type="text" id="leftArmInfo3" placeholder="Информация импланта левой руки">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="neuroInterfaceImplant1">ИМПЛАНТ НЕЙРОИНТЕРФЕЙСА 1</label>
+                                <input type="text" id="neuroInterfaceImplant1" placeholder="Название импланта нейроинтерфейса">
+                                <label for="neuroInterfaceInfo1">ИНФОРМАЦИЯ ИМПЛАНТА НЕЙРОИНТЕРФЕЙСА 1</label>
+                                <input type="text" id="neuroInterfaceInfo1" placeholder="Информация импланта нейроинтерфейса">
+                            </div>
+                            <div class="input-group">
+                                <label for="neuroInterfaceImplant2">ИМПЛАНТ НЕЙРОИНТЕРФЕЙСА 2</label>
+                                <input type="text" id="neuroInterfaceImplant2" placeholder="Название импланта нейроинтерфейса">
+                                <label for="neuroInterfaceInfo2">ИНФОРМАЦИЯ ИМПЛАНТА НЕЙРОИНТЕРФЕЙСА 2</label>
+                                <input type="text" id="neuroInterfaceInfo2" placeholder="Информация импланта нейроинтерфейса">
+                            </div>
+                            <div class="input-group">
+                                <label for="neuroInterfaceImplant3">ИМПЛАНТ НЕЙРОИНТЕРФЕЙСА 3</label>
+                                <input type="text" id="neuroInterfaceImplant3" placeholder="Название импланта нейроинтерфейса">
+                                <label for="neuroInterfaceInfo3">ИНФОРМАЦИЯ ИМПЛАНТА НЕЙРОИНТЕРФЕЙСА 3</label>
+                                <input type="text" id="neuroInterfaceInfo3" placeholder="Информация импланта нейроинтерфейса">
+                            </div>
+                            <div class="input-group">
+                                <label for="neuroInterfaceImplant4">ИМПЛАНТ НЕЙРОИНТЕРФЕЙСА 4</label>
+                                <input type="text" id="neuroInterfaceImplant4" placeholder="Название импланта нейроинтерфейса">
+                                <label for="neuroInterfaceInfo4">ИНФОРМАЦИЯ ИМПЛАНТА НЕЙРОИНТЕРФЕЙСА 4</label>
+                                <input type="text" id="neuroInterfaceInfo4" placeholder="Информация импланта нейроинтерфейса">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="rightLegImplant1">ИМПЛАНТ ПРАВОЙ НОГИ 1</label>
+                                <input type="text" id="rightLegImplant1" placeholder="Название импланта правой ноги">
+                                <label for="rightLegInfo1">ИНФОРМАЦИЯ ИМПЛАНТА ПРАВОЙ НОГИ 1</label>
+                                <input type="text" id="rightLegInfo1" placeholder="Информация импланта правой ноги">
+                            </div>
+                            <div class="input-group">
+                                <label for="rightLegImplant2">ИМПЛАНТ ПРАВОЙ НОГИ 2</label>
+                                <input type="text" id="rightLegImplant2" placeholder="Название импланта правой ноги">
+                                <label for="rightLegInfo2">ИНФОРМАЦИЯ ИМПЛАНТА ПРАВОЙ НОГИ 2</label>
+                                <input type="text" id="rightLegInfo2" placeholder="Информация импланта правой ноги">
+                            </div>
+                            <div class="input-group">
+                                <label for="rightLegImplant3">ИМПЛАНТ ПРАВОЙ НОГИ 3</label>
+                                <input type="text" id="rightLegImplant3" placeholder="Название импланта правой ноги">
+                                <label for="rightLegInfo3">ИНФОРМАЦИЯ ИМПЛАНТА ПРАВОЙ НОГИ 3</label>
+                                <input type="text" id="rightLegInfo3" placeholder="Информация импланта правой ноги">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="leftLegImplant1">ИМПЛАНТ ЛЕВОЙ НОГИ 1</label>
+                                <input type="text" id="leftLegImplant1" placeholder="Название импланта левой ноги">
+                                <label for="leftLegInfo1">ИНФОРМАЦИЯ ИМПЛАНТА ЛЕВОЙ НОГИ 1</label>
+                                <input type="text" id="leftLegInfo1" placeholder="Информация импланта левой ноги">
+                            </div>
+                            <div class="input-group">
+                                <label for="leftLegImplant2">ИМПЛАНТ ЛЕВОЙ НОГИ 2</label>
+                                <input type="text" id="leftLegImplant2" placeholder="Название импланта левой ноги">
+                                <label for="leftLegInfo2">ИНФОРМАЦИЯ ИМПЛАНТА ЛЕВОЙ НОГИ 2</label>
+                                <input type="text" id="leftLegInfo2" placeholder="Информация импланта левой ноги">
+                            </div>
+                            <div class="input-group">
+                                <label for="leftLegImplant3">ИМПЛАНТ ЛЕВОЙ НОГИ 3</label>
+                                <input type="text" id="leftLegImplant3" placeholder="Название импланта левой ноги">
+                                <label for="leftLegInfo3">ИНФОРМАЦИЯ ИМПЛАНТА ЛЕВОЙ НОГИ 3</label>
+                                <input type="text" id="leftLegInfo3" placeholder="Информация импланта левой ноги">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>ИМПЛАНТЫ ПО СЕМЬ ШТУК</h3>
+                    <div class="seven-implant-section">
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="internalImplant1">ВНУТРЕННИЙ ИМПЛАНТ 1</label>
+                                <input type="text" id="internalImplant1" placeholder="Название внутреннего импланта">
+                                <label for="internalInfo1">ИНФОРМАЦИЯ ВНУТРЕННЕГО ИМПЛАНТА 1</label>
+                                <input type="text" id="internalInfo1" placeholder="Информация внутреннего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="internalImplant2">ВНУТРЕННИЙ ИМПЛАНТ 2</label>
+                                <input type="text" id="internalImplant2" placeholder="Название внутреннего импланта">
+                                <label for="internalInfo2">ИНФОРМАЦИЯ ВНУТРЕННЕГО ИМПЛАНТА 2</label>
+                                <input type="text" id="internalInfo2" placeholder="Информация внутреннего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="internalImplant3">ВНУТРЕННИЙ ИМПЛАНТ 3</label>
+                                <input type="text" id="internalImplant3" placeholder="Название внутреннего импланта">
+                                <label for="internalInfo3">ИНФОРМАЦИЯ ВНУТРЕННЕГО ИМПЛАНТА 3</label>
+                                <input type="text" id="internalInfo3" placeholder="Информация внутреннего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="internalImplant4">ВНУТРЕННИЙ ИМПЛАНТ 4</label>
+                                <input type="text" id="internalImplant4" placeholder="Название внутреннего импланта">
+                                <label for="internalInfo4">ИНФОРМАЦИЯ ВНУТРЕННЕГО ИМПЛАНТА 4</label>
+                                <input type="text" id="internalInfo4" placeholder="Информация внутреннего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="internalImplant5">ВНУТРЕННИЙ ИМПЛАНТ 5</label>
+                                <input type="text" id="internalImplant5" placeholder="Название внутреннего импланта">
+                                <label for="internalInfo5">ИНФОРМАЦИЯ ВНУТРЕННЕГО ИМПЛАНТА 5</label>
+                                <input type="text" id="internalInfo5" placeholder="Информация внутреннего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="internalImplant6">ВНУТРЕННИЙ ИМПЛАНТ 6</label>
+                                <input type="text" id="internalImplant6" placeholder="Название внутреннего импланта">
+                                <label for="internalInfo6">ИНФОРМАЦИЯ ВНУТРЕННЕГО ИМПЛАНТА 6</label>
+                                <input type="text" id="internalInfo6" placeholder="Информация внутреннего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="internalImplant7">ВНУТРЕННИЙ ИМПЛАНТ 7</label>
+                                <input type="text" id="internalImplant7" placeholder="Название внутреннего импланта">
+                                <label for="internalInfo7">ИНФОРМАЦИЯ ВНУТРЕННЕГО ИМПЛАНТА 7</label>
+                                <input type="text" id="internalInfo7" placeholder="Информация внутреннего импланта">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="externalImplant1">ВНЕШНИЙ ИМПЛАНТ 1</label>
+                                <input type="text" id="externalImplant1" placeholder="Название внешнего импланта">
+                                <label for="externalInfo1">ИНФОРМАЦИЯ ВНЕШНЕГО ИМПЛАНТА 1</label>
+                                <input type="text" id="externalInfo1" placeholder="Информация внешнего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="externalImplant2">ВНЕШНИЙ ИМПЛАНТ 2</label>
+                                <input type="text" id="externalImplant2" placeholder="Название внешнего импланта">
+                                <label for="externalInfo2">ИНФОРМАЦИЯ ВНЕШНЕГО ИМПЛАНТА 2</label>
+                                <input type="text" id="externalInfo2" placeholder="Информация внешнего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="externalImplant3">ВНЕШНИЙ ИМПЛАНТ 3</label>
+                                <input type="text" id="externalImplant3" placeholder="Название внешнего импланта">
+                                <label for="externalInfo3">ИНФОРМАЦИЯ ВНЕШНЕГО ИМПЛАНТА 3</label>
+                                <input type="text" id="externalInfo3" placeholder="Информация внешнего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="externalImplant4">ВНЕШНИЙ ИМПЛАНТ 4</label>
+                                <input type="text" id="externalImplant4" placeholder="Название внешнего импланта">
+                                <label for="externalInfo4">ИНФОРМАЦИЯ ВНЕШНЕГО ИМПЛАНТА 4</label>
+                                <input type="text" id="externalInfo4" placeholder="Информация внешнего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="externalImplant5">ВНЕШНИЙ ИМПЛАНТ 5</label>
+                                <input type="text" id="externalImplant5" placeholder="Название внешнего импланта">
+                                <label for="externalInfo5">ИНФОРМАЦИЯ ВНЕШНЕГО ИМПЛАНТА 5</label>
+                                <input type="text" id="externalInfo5" placeholder="Информация внешнего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="externalImplant6">ВНЕШНИЙ ИМПЛАНТ 6</label>
+                                <input type="text" id="externalImplant6" placeholder="Название внешнего импланта">
+                                <label for="externalInfo6">ИНФОРМАЦИЯ ВНЕШНЕГО ИМПЛАНТА 6</label>
+                                <input type="text" id="externalInfo6" placeholder="Информация внешнего импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="externalImplant7">ВНЕШНИЙ ИМПЛАНТ 7</label>
+                                <input type="text" id="externalImplant7" placeholder="Название внешнего импланта">
+                                <label for="externalInfo7">ИНФОРМАЦИЯ ВНЕШНЕГО ИМПЛАНТА 7</label>
+                                <input type="text" id="externalInfo7" placeholder="Информация внешнего импланта">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="stylishImplant1">СТИЛЕВОЙ ИМПЛАНТ 1</label>
+                                <input type="text" id="stylishImplant1" placeholder="Название стилевого импланта">
+                                <label for="stylishInfo1">ИНФОРМАЦИЯ СТИЛЕВОГО ИМПЛАНТА 1</label>
+                                <input type="text" id="stylishInfo1" placeholder="Информация стилевого импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="stylishImplant2">СТИЛЕВОЙ ИМПЛАНТ 2</label>
+                                <input type="text" id="stylishImplant2" placeholder="Название стилевого импланта">
+                                <label for="stylishInfo2">ИНФОРМАЦИЯ СТИЛЕВОГО ИМПЛАНТА 2</label>
+                                <input type="text" id="stylishInfo2" placeholder="Информация стилевого импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="stylishImplant3">СТИЛЕВОЙ ИМПЛАНТ 3</label>
+                                <input type="text" id="stylishImplant3" placeholder="Название стилевого импланта">
+                                <label for="stylishInfo3">ИНФОРМАЦИЯ СТИЛЕВОГО ИМПЛАНТА 3</label>
+                                <input type="text" id="stylishInfo3" placeholder="Информация стилевого импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="stylishImplant4">СТИЛЕВОЙ ИМПЛАНТ 4</label>
+                                <input type="text" id="stylishImplant4" placeholder="Название стилевого импланта">
+                                <label for="stylishInfo4">ИНФОРМАЦИЯ СТИЛЕВОГО ИМПЛАНТА 4</label>
+                                <input type="text" id="stylishInfo4" placeholder="Информация стилевого импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="stylishImplant5">СТИЛЕВОЙ ИМПЛАНТ 5</label>
+                                <input type="text" id="stylishImplant5" placeholder="Название стилевого импланта">
+                                <label for="stylishInfo5">ИНФОРМАЦИЯ СТИЛЕВОГО ИМПЛАНТА 5</label>
+                                <input type="text" id="stylishInfo5" placeholder="Информация стилевого импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="stylishImplant6">СТИЛЕВОЙ ИМПЛАНТ 6</label>
+                                <input type="text" id="stylishImplant6" placeholder="Название стилевого импланта">
+                                <label for="stylishInfo6">ИНФОРМАЦИЯ СТИЛЕВОГО ИМПЛАНТА 6</label>
+                                <input type="text" id="stylishInfo6" placeholder="Информация стилевого импланта">
+                            </div>
+                            <div class="input-group">
+                                <label for="stylishImplant7">СТИЛЕВОЙ ИМПЛАНТ 7</label>
+                                <input type="text" id="stylishImplant7" placeholder="Название стилевого импланта">
+                                <label for="stylishInfo7">ИНФОРМАЦИЯ СТИЛЕВОГО ИМПЛАНТА 7</label>
+                                <input type="text" id="stylishInfo7" placeholder="Информация стилевого импланта">
+                            </div>
+                        </div>
+                        
+                        <div class="implant-group">
+                            <div class="input-group">
+                                <label for="borg1">БОРГИРОВАНИЕ 1</label>
+                                <input type="text" id="borg1" placeholder="Название боргирования">
+                                <label for="borgInfo1">ИНФОРМАЦИЯ БОРГИРОВАНИЯ 1</label>
+                                <input type="text" id="borgInfo1" placeholder="Информация боргирования">
+                            </div>
+                            <div class="input-group">
+                                <label for="borg2">БОРГИРОВАНИЕ 2</label>
+                                <input type="text" id="borg2" placeholder="Название боргирования">
+                                <label for="borgInfo2">ИНФОРМАЦИЯ БОРГИРОВАНИЯ 2</label>
+                                <input type="text" id="borgInfo2" placeholder="Информация боргирования">
+                            </div>
+                            <div class="input-group">
+                                <label for="borg3">БОРГИРОВАНИЕ 3</label>
+                                <input type="text" id="borg3" placeholder="Название боргирования">
+                                <label for="borgInfo3">ИНФОРМАЦИЯ БОРГИРОВАНИЯ 3</label>
+                                <input type="text" id="borgInfo3" placeholder="Информация боргирования">
+                            </div>
+                            <div class="input-group">
+                                <label for="borg4">БОРГИРОВАНИЕ 4</label>
+                                <input type="text" id="borg4" placeholder="Название боргирования">
+                                <label for="borgInfo4">ИНФОРМАЦИЯ БОРГИРОВАНИЯ 4</label>
+                                <input type="text" id="borgInfo4" placeholder="Информация боргирования">
+                            </div>
+                            <div class="input-group">
+                                <label for="borg5">БОРГИРОВАНИЕ 5</label>
+                                <input type="text" id="borg5" placeholder="Название боргирования">
+                                <label for="borgInfo5">ИНФОРМАЦИЯ БОРГИРОВАНИЯ 5</label>
+                                <input type="text" id="borgInfo5" placeholder="Информация боргирования">
+                            </div>
+                            <div class="input-group">
+                                <label for="borg6">БОРГИРОВАНИЕ 6</label>
+                                <input type="text" id="borg6" placeholder="Название боргирования">
+                                <label for="borgInfo6">ИНФОРМАЦИЯ БОРГИРОВАНИЯ 6</label>
+                                <input type="text" id="borgInfo6" placeholder="Информация боргирования">
+                            </div>
+                            <div class="input-group">
+                                <label for="borg7">БОРГИРОВАНИЕ 7</label>
+                                <input type="text" id="borg7" placeholder="Название боргирования">
+                                <label for="borgInfo7">ИНФОРМАЦИЯ БОРГИРОВАНИЯ 7</label>
+                                <input type="text" id="borgInfo7" placeholder="Информация боргирования">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Tab 4: Profile -->
+                <section class="tab-content" id="profile">
+                    <h2>ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ</h2>
+                    <div class="profile-actions">
+                        <button id="savePdfBtn" class="cyber-btn">СОХРАНИТЬ PDF</button>
+                        <button id="downloadPdfBtn" class="cyber-btn">ЗАГРУЗИТЬ PDF</button>
+                        <button id="logoutBtn" class="cyber-btn secondary">ВЫЙТИ</button>
+                    </div>
+                    
+                    <div class="admin-controls">
+                        <h3>УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ</h3>
+                        <div class="user-management">
+                            <div class="input-group">
+                                <label for="newUserUsername">ИМЯ НОВОГО ПОЛЬЗОВАТЕЛЯ</label>
+                                <input type="text" id="newUserUsername" placeholder="Введите имя нового пользователя">
+                            </div>
+                            <div class="input-group">
+                                <label for="newUserPassword">ПАРОЛЬ НОВОГО ПОЛЬЗОВАТЕЛЯ</label>
+                                <input type="password" id="newUserPassword" placeholder="Введите пароль нового пользователя">
+                            </div>
+                            <button id="createUserBtn" class="cyber-btn">СОЗДАТЬ ПОЛЬЗОВАТЕЛЯ</button>
+                        </div>
+                        
+                        <div class="users-list">
+                            <h3>СПИСОК ПОЛЬЗОВАТЕЛЕЙ</h3>
+                            <div id="usersListContainer">
+                                <!-- List of users will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="saved-pdfs">
+                        <h3>СОХРАНЕННЫЕ ПЕРСОНАЖИ</h3>
+                        <div id="pdfList">
+                            <!-- Saved PDFs will appear here -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
